@@ -13,6 +13,8 @@ function* getUsersHouseholds () {
   }
 }
 
+
+
 function* householdsSaga() {
   yield takeLatest('FETCH_HOUSEHOLDS', getUsersHouseholds);
 }

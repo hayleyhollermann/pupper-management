@@ -2,9 +2,10 @@ import { combineReducers } from 'redux';
 
 // loginMessage holds the string that will display
 // on the login screen if there's an error
-const usersHouseholds = (state=[], action) => {
+const pets = (state=[], action) => {
     switch (action.type) {
-        case 'SET_HOUSEHOLDS':
+        case 'SET_PETS':
+            console.log('in pets reducer');
             return action.payload;
         default:
             return state;
@@ -17,5 +18,5 @@ const usersHouseholds = (state=[], action) => {
 // these will be on the redux state at:
 // state.errors.loginMessage and state.errors.registrationMessage
 export default combineReducers({
-  usersHouseholds,
+  pets,
 });

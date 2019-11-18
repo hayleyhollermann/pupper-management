@@ -8,6 +8,8 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 class HomePage extends Component {
   componentDidMount() {
     this.props.dispatch({type: 'FETCH_HOUSEHOLDS'});
+    this.props.dispatch({type: 'FETCH_PETS'});
+
   }
 
   render() {
@@ -16,6 +18,7 @@ class HomePage extends Component {
       <h1 id="welcome">
         Welcome, { this.props.user.username }!
       </h1>
+      <h2>The id of your household is: {this.props.user.selected_household_id}</h2>
       <LogOutButton className="log-in" />
       <pre>{JSON.stringify(this.props.usersHouseholds)}</pre>
       <p>you belong to these households:</p>
