@@ -6,6 +6,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import PetsIcon from '@material-ui/icons/Pets';
 
 
 class HomePage extends Component {
@@ -65,7 +66,7 @@ class HomePage extends Component {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button onClick={()=>this.getPetInfo(this.props.pet)} size="small">Info</Button>
+            <Button size='large' onClick={()=>this.getPetInfo(this.props.pet)} size="small"><PetsIcon /></Button>
           </CardActions>
         </Card>
       </>

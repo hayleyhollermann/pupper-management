@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PetCard from '../PetCard/PetCard';
+import {Button} from '@material-ui/core';
+import AddRoundedIcon from '@material-ui/icons/AddRounded';
 
 
 class HomePage extends Component {
@@ -25,7 +27,11 @@ class HomePage extends Component {
         {this.props.pets.map((pet) => 
           <PetCard key={pet.id} pet={pet} />
         )}
-        <p>you belong to these households:</p>
+      <Button size='large'>
+        <AddRoundedIcon /> Add a Pet
+      </Button>
+
+      <p>you belong to these households:</p>
         <ul> {this.props.usersHouseholds.map((household) =>
           <li key={household.id}>{household.name}</li>
         )}
