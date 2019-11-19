@@ -17,7 +17,7 @@ function* getPetInfo (action) {
 try {
   const petInfoResponse = yield axios.get(`/pets/petInfo/${action.payload}`);
   console.log('response in getPetInfo', petInfoResponse.data);
-  // yield put({type: 'SET_PET', payload: petInfoResponse.data})
+  yield put({type: 'SET_PET', payload: petInfoResponse.data})
   } catch(err) {
     console.log('error fetching info on this pet in getPetInfo', err);
   }

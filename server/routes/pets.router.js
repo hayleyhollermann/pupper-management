@@ -19,7 +19,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
             })
             .catch((err) => {
                 console.log('error in select pets in a household', err);
-                
                 res.sendStatus(500)
             })
         })

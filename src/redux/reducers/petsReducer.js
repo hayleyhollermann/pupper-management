@@ -10,6 +10,17 @@ const pets = (state=[], action) => {
     }
 };
 
+const petInfo = (state={}, action) => {    
+    switch (action.type) {
+        case 'SET_PET':
+            console.log('in pet Info reducer', action.payload);
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
   pets,
+  petInfo,
 });
