@@ -2,24 +2,8 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
-// const encryptLib = require('../modules/encryption');
-
 
 router.get('/', rejectUnauthenticated, (req, res) => {
-    console.log('req.user:', req.user);
-    const queryText = `SELECT "households"."id", "households"."name", "households_users"."users_id", "user"."username", "households_users"."is_admin", "user"."selected_household_id" FROM "households"
-    JOIN "households_users" ON "households_users"."households_id"="households"."id"
-    JOIN "user" ON "user"."id"="households_users"."users_id"
-    WHERE "user"."id"=$1;`;
-    pool.query(queryText, [req.user.id])
-        .then(results => res.send(results.rows))
-        .catch(error => {
-            console.log('Error making SELECT for /user-households:', error);
-            res.sendStatus(500);
-        });
-});
-
-router.get('/pets', rejectUnauthenticated, (req, res) => {
     console.log('in get /pets', req.user);
     const queryText = `SELECT "selected_household_id" FROM "user"
         WHERE "id"=$1;`;
@@ -33,6 +17,11 @@ router.get('/pets', rejectUnauthenticated, (req, res) => {
             .then((results) => {
                 res.send(results.rows)
             })
+            .catch((err) => {
+                console.log('error in select pets in a household', err);
+                
+                res.sendStatus(500)
+            })
         })
 
         .catch(error => {
@@ -40,5 +29,23 @@ router.get('/pets', rejectUnauthenticated, (req, res) => {
             res.sendStatus(500);
         });
 });
+
+router.get('/events/:id', rejectUnauthenticated, (req, res) => {
+    console.log('in get /pets/events', req.params.id);
+    queryText = `SELECT max("pets_events"."time") AS "time",  "pets"."id", "pets"."name", "events"."type" AS "event_type", "medications"."type", "medications"."id" FROM "pets_events" 
+        JOIN "events" ON "events"."id"="pets_events"."events_id"
+        JOIN "pets" ON "pets"."id"="pets_events"."pets_id"
+        JOIN "households" ON "pets"."households_id" = "households"."id"
+        LEFT OUTER JOIN "medications" ON "medications"."id"="pets_events"."medications_id"
+        WHERE ("households"."id"=$1)
+        GROUP BY "pets"."id", "events"."type", "pets"."name", "events"."type", "medications"."type", "medications"."id";`
+    pool.query(queryText, [req.params.id])
+        .then((results) => {
+            res.send(results.rows)
+        })
+        .catch((err) => {
+            res.sendStatus(500)
+        })
+})
 
 module.exports = router;
