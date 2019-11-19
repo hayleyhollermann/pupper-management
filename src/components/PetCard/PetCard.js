@@ -47,8 +47,6 @@ class HomePage extends Component {
 
   getPetInfo = () => {
     console.log('getting info for:', this.props.pet.pet_name);
-    this.props.dispatch({type: 'FETCH_EVENTS', payload: this.props.pet.id})
-    this.props.dispatch({type: 'FETCH_PET', payload: this.props.pet.id})
     this.props.history.push(`/home/${this.props.pet.id}`)
   }
 
