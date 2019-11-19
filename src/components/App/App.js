@@ -19,6 +19,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import './App.css';
 import HomePage from '../HomePage/HomePage';
 import PetInfo from '../PetInfo/PetInfo';
+import AddPet from '../AddPet/AddPet';
 
 class App extends Component {
   componentDidMount () {
@@ -57,6 +58,7 @@ class App extends Component {
               component={InfoPage}
             />
             <ProtectedRoute exact path="/home/:id" component={PetInfo}/>
+            <ProtectedRoute exact path="/add-pet/:id" component={AddPet}/>
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>

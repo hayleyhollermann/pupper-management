@@ -66,7 +66,7 @@ class HomePage extends Component {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size='large' onClick={()=>this.getPetInfo(this.props.pet)} size="small"><PetsIcon /></Button>
+            <Button size='large' onClick={this.getPetInfo} ><PetsIcon /></Button>
           </CardActions>
         </Card>
       </>

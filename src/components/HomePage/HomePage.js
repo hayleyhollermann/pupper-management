@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import PetCard from '../PetCard/PetCard';
 import {Button} from '@material-ui/core';
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
+import { withRouter } from 'react-router-dom';
+
 
 
 class HomePage extends Component {
@@ -16,6 +18,11 @@ class HomePage extends Component {
     this.props.dispatch({ type: 'FETCH_PETS' });
   }
 
+  addAPetForm = () => {
+    console.log('button to add pet to', this.props.user.selected_household_id);
+    
+    this.props.history.push(`/add-pet/${this.props.user.selected_household_id}`)
+  }
 
   render() {
     return (
@@ -27,7 +34,7 @@ class HomePage extends Component {
         {this.props.pets.map((pet) => 
           <PetCard key={pet.id} pet={pet} />
         )}
-      <Button size='large'>
+      <Button size='large' onClick={this.addAPetForm}>
         <AddRoundedIcon /> Add a Pet
       </Button>
 
@@ -52,4 +59,4 @@ const mapStateToProps = state => ({
 });
 
 // this allows us to use <App /> in index.js
-export default connect(mapStateToProps)(HomePage);
+export default connect(mapStateToProps)(withRouter(HomePage));
