@@ -47,6 +47,8 @@ class HomePage extends Component {
 
   getPetInfo = () => {
     console.log('getting info for:', this.props.pet.pet_name);
+    this.props.dispatch({type: 'FETCH_EVENTS', payload: this.props.pet.id})
+    this.props.dispatch({type: 'FETCH_PET', payload: this.props.pet.id})
     this.props.history.push(`/home/${this.props.pet.id}`)
   }
 
@@ -65,10 +67,9 @@ class HomePage extends Component {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button onClick={this.getPetInfo} size="small">Info</Button>
+            <Button onClick={()=>this.getPetInfo(this.props.pet)} size="small">Info</Button>
           </CardActions>
         </Card>
-        <pre>{JSON.stringify(this.props.events)}</pre>
       </>
     )
   }

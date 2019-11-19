@@ -12,7 +12,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
             // console.log(results.rows);            
             const queryText2 = `SELECT "pets"."name" AS "pet_name", "pets"."id", "pets"."households_id", "households"."name", "pets"."breed", "pets"."vet_name", "pets"."vet_phone", "pets"."age", "pets"."weight" FROM "pets" 
             JOIN "households" ON "pets"."households_id"="households"."id"
-            WHERE "households"."id"=$1;`;
+            WHERE "households"."id"=$1 ORDER BY "pets"."id";`;
             pool.query(queryText2, [results.rows[0].selected_household_id])
             .then((results) => {
                 res.send(results.rows)
@@ -30,15 +30,28 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         });
 });
 
+router.get('/petInfo/:id', rejectUnauthenticated, (req, res) => {
+    console.log('in get /pets/petInfo', req.params.id);
+    queryText = `SELECT * FROM "pets"
+    WHERE "id" = $1;`
+    pool.query(queryText, [req.params.id])
+        .then((results) => {
+            res.send(results.rows[0])
+        })
+        .catch((err) => {
+            console.log('error in get /pets/petInfo', err);
+            res.sendStatus(500)
+        })
+})
+
 router.get('/events/:id', rejectUnauthenticated, (req, res) => {
     console.log('in get /pets/events', req.params.id);
-    queryText = `SELECT max("pets_events"."time") AS "time",  "pets"."id", "pets"."name", "events"."type" AS "event_type", "medications"."type", "medications"."id" FROM "pets_events" 
-        JOIN "events" ON "events"."id"="pets_events"."events_id"
-        JOIN "pets" ON "pets"."id"="pets_events"."pets_id"
-        JOIN "households" ON "pets"."households_id" = "households"."id"
-        LEFT OUTER JOIN "medications" ON "medications"."id"="pets_events"."medications_id"
-        WHERE ("households"."id"=$1)
-        GROUP BY "pets"."id", "events"."type", "pets"."name", "events"."type", "medications"."type", "medications"."id";`
+        queryText = `SELECT max("pets_events"."time") AS "time",  "pets"."id", "pets"."name", "events"."type" AS "event_type", "medications"."type", "medications"."id" FROM "pets_events" 
+            JOIN "events" ON "events"."id"="pets_events"."events_id"
+            JOIN "pets" ON "pets"."id"="pets_events"."pets_id"
+            LEFT OUTER JOIN "medications" ON "medications"."id"="pets_events"."medications_id"
+            WHERE ("pets"."id"=$1)
+            GROUP BY "pets"."id", "events"."type", "pets"."name", "events"."type", "medications"."type", "medications"."id";`
     pool.query(queryText, [req.params.id])
         .then((results) => {
             res.send(results.rows)

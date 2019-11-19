@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
 
 class HomePage extends Component {
 
-
   render() {
     return (
       <>
-        <p>Hello</p>
+    <Paper >
+      <Typography variant="h5" component="h3">
+        This Pets name is: 
+      </Typography>
+      <Typography component="p">
+        Paper can be used to build surface or other elements for your application.
+      </Typography>
+    </Paper>
+    <pre>{JSON.stringify(this.props.events)}</pre>
       </>
     )
   }

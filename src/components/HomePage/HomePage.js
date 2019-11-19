@@ -22,7 +22,6 @@ class HomePage extends Component {
           Welcome, {this.props.user.username}!
       </h1>
         <h2>The id of your household is: {this.props.user.selected_household_id}</h2>
-        <pre>{JSON.stringify(this.props.pets)}</pre>
         {this.props.pets.map((pet) => 
           <PetCard key={pet.id} pet={pet} />
         )}
