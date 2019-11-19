@@ -15,7 +15,7 @@ class HomePage extends Component {
   render() {
     return (
       <>
-    <Paper className="petInfoPaper" elevation='2'>
+    <Paper className="petInfoPaper" elevation={3}>
       <Typography variant="h4" component="h3">
         {this.props.petInfo.name}
       </Typography>
@@ -28,8 +28,14 @@ class HomePage extends Component {
         Breed: {this.props.petInfo.breed} <br />
         Weight: {this.props.petInfo.weight} <br />
         Age: {this.props.petInfo.age} <br />
-        Vet Name: {this.props.petInfo.vet_name} <br />
-        Vet Phone: {this.props.petInfo.vet_phone} <br />
+        Vet Name: {
+            this.props.petInfo.vet_name ? this.props.petInfo.vet_name
+            : 'No vet name on file'
+        } <br />
+        Vet Phone: {
+            this.props.petInfo.vet_phone ? this.props.petInfo.vet_phone
+            : 'No vet phone on file'        
+        } <br />
       </Typography>
     </Paper>
     <pre>{JSON.stringify(this.props.petInfo)}</pre>
