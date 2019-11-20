@@ -10,7 +10,17 @@ class HomePage extends Component {
     let Petid = this.props.match.params.id
     this.props.dispatch({type: 'FETCH_EVENTS', payload: Petid})
     this.props.dispatch({type: 'FETCH_PET', payload: Petid})
+    // this.mostRecentEvent(this.props.events);
   }
+
+//   mostRecentEvent = (recentEvents) => {
+//       console.log('in mostRecentEvent');
+      
+//       for (let i = 0; i < recentEvents.length; i++) {
+//           const el = recentEvents[i];
+//           console.log(el);
+//       }
+//   }
 
   render() {
     return (
@@ -20,9 +30,16 @@ class HomePage extends Component {
         {this.props.petInfo.name}
       </Typography>
       <Typography component="p">
-        Fed: <br />
-        Walked: <br />
-        Last Outside: <br />
+        
+        Fed: {this.props.events.length > 1 ? 
+                this.props.events.filter(recentEvents => recentEvents.event_type === 'fed')[0].time
+             : 'N/A'  } <br />
+        Walked: {this.props.events.length > 1 ? 
+                this.props.events.filter(recentEvents => recentEvents.event_type === 'walked')[0].time
+             : 'N/A'  } <br />
+        Last Outside: {this.props.events.length > 1 ? 
+                this.props.events.filter(recentEvents => recentEvents.event_type === 'last outside')[0].time
+             : 'N/A'  } <br />
       </Typography>
       <Typography component="p">
         Breed: {this.props.petInfo.breed} <br />
@@ -38,6 +55,7 @@ class HomePage extends Component {
         } <br />
       </Typography>
     </Paper>
+    <pre>{JSON.stringify(this.props.events.filter(recentEvents => recentEvents.event_type === 'fed')[0])}</pre>
     <pre>{JSON.stringify(this.props.petInfo)}</pre>
     <pre>{JSON.stringify(this.props.events)}</pre>
       </>
