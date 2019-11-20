@@ -29,20 +29,23 @@ class HomePage extends Component {
       <div>
         <h1 id="welcome">
           Welcome, {this.props.user.username}!
-      </h1>
-        <h2>The id of your household is: {this.props.user.selected_household_id}</h2>
-        {this.props.pets.map((pet) => 
-          <PetCard key={pet.id} pet={pet} />
-        )}
-      <Button size='large' onClick={this.addAPetForm}>
-        <AddRoundedIcon /> Add a Pet
-      </Button>
-
-      <p>you belong to these households:</p>
-        <ul> {this.props.usersHouseholds.map((household) =>
-          <li key={household.id}>{household.name}</li>
-        )}
-        </ul>
+        </h1>
+        { this.props.user.selected_household_id ? 
+        <div>
+          <h2>The id of your household is: {this.props.user.selected_household_id}</h2>
+            {this.props.pets.map((pet) => 
+              <PetCard key={pet.id} pet={pet} />
+            )}
+          <Button size='large' onClick={this.addAPetForm}>
+            <AddRoundedIcon /> Add a Pet
+          </Button>
+          <p>you belong to these households:</p>
+          <ul> {this.props.usersHouseholds.map((household) =>
+            <li key={household.id}>{household.name}</li>
+          )}</ul>
+        </div>
+        : <h2>Get started by creating a household!</h2>
+        }
       </div>
     )
   }
