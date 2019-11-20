@@ -3,13 +3,17 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
+
+//--------GETS---------
+// GET all pets in a household
 router.get('/', rejectUnauthenticated, (req, res) => {
     console.log('in get /pets', req.user);
+    // select current household ID of user
     const queryText = `SELECT "selected_household_id" FROM "user"
         WHERE "id"=$1;`;
     pool.query(queryText, [req.user.id])
         .then((results) => {
-            // console.log(results.rows);            
+            // gets all pets in current household
             const queryText2 = `SELECT "pets"."name" AS "pet_name", "pets"."id", "pets"."households_id", "households"."name", "pets"."breed", "pets"."vet_name", "pets"."vet_phone", "pets"."age", "pets"."weight" FROM "pets" 
             JOIN "households" ON "pets"."households_id"="households"."id"
             WHERE "households"."id"=$1 ORDER BY "pets"."id";`;
@@ -22,13 +26,12 @@ router.get('/', rejectUnauthenticated, (req, res) => {
                 res.sendStatus(500)
             })
         })
-
         .catch(error => {
             console.log('Error making SELECT for /user-households:', error);
             res.sendStatus(500);
         });
 });
-
+// GET all info on a given pet
 router.get('/petInfo/:id', rejectUnauthenticated, (req, res) => {
     console.log('in get /pets/petInfo', req.params.id);
     queryText = `SELECT * FROM "pets"
@@ -42,15 +45,15 @@ router.get('/petInfo/:id', rejectUnauthenticated, (req, res) => {
             res.sendStatus(500)
         })
 })
-
+// GET all events for a given pet
 router.get('/events/:id', rejectUnauthenticated, (req, res) => {
     console.log('in get /pets/events', req.params.id);
-        queryText = `SELECT max("pets_events"."time") AS "time",  "pets"."id", "pets"."name", "events"."type" AS "event_type", "medications"."type", "medications"."id" FROM "pets_events" 
-            JOIN "events" ON "events"."id"="pets_events"."events_id"
-            JOIN "pets" ON "pets"."id"="pets_events"."pets_id"
-            LEFT OUTER JOIN "medications" ON "medications"."id"="pets_events"."medications_id"
-            WHERE ("pets"."id"=$1)
-            GROUP BY "pets"."id", "events"."type", "pets"."name", "events"."type", "medications"."type", "medications"."id";`
+    queryText = `SELECT max("pets_events"."time") AS "time",  "pets"."id", "pets"."name", "events"."type" AS "event_type", "medications"."type", "medications"."id" FROM "pets_events" 
+        JOIN "events" ON "events"."id"="pets_events"."events_id"
+        JOIN "pets" ON "pets"."id"="pets_events"."pets_id"
+        LEFT OUTER JOIN "medications" ON "medications"."id"="pets_events"."medications_id"
+        WHERE ("pets"."id"=$1)
+        GROUP BY "pets"."id", "events"."type", "pets"."name", "events"."type", "medications"."type", "medications"."id";`
     pool.query(queryText, [req.params.id])
         .then((results) => {
             res.send(results.rows)
@@ -59,5 +62,21 @@ router.get('/events/:id', rejectUnauthenticated, (req, res) => {
             res.sendStatus(500)
         })
 })
+
+//----------POSTS----------
+// ADD a pet to a household
+router.post('/', rejectUnauthenticated, (req, res) => {
+    console.log('in post /pets', req.body)
+    queryText = `INSERT INTO "pets" ("name", "households_id", "breed", "weight", "age", "vet_name", "vet_phone")
+        VALUES ($1, $2, $3, $4, $5, $6, $7);`
+    pool.query(queryText, [req.body.name, req.body.householdId, req.body.breed, req.body.weight, req.body.age, req.body.vetName, req.body.vetPhone])
+    .then(() => {
+        res.sendStatus(200);
+    })
+    .catch(() => {
+        res.sendStatus(500);
+    })
+})
+
 
 module.exports = router;
