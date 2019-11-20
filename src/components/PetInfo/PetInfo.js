@@ -28,24 +28,30 @@ class HomePage extends Component {
       </Typography>
       <Typography component="p">
         
-        Fed: {this.props.events.length > 1 ? 
+        Fed: 
+            {(this.props.events.length > 1) && 
+                (this.props.events.filter(recentEvents => recentEvents.event_type === 'fed').length > 0) ? 
                 <Moment format='LLLL'>{this.props.events.filter(recentEvents => recentEvents.event_type === 'fed')[0].time}</Moment>
-             : 'N/A'  } 
-             <Button onClick>
+            : 'N/A'  } 
+            <Button>
                 Update!
-             </Button><br />
-        Walked: {this.props.events.length > 1 ? 
+            </Button><br />
+        Walked: 
+            {(this.props.events.length > 1) && 
+                (this.props.events.filter(recentEvents => recentEvents.event_type === 'walked').length > 0) ?  
                 <Moment format='LLLL'>{this.props.events.filter(recentEvents => recentEvents.event_type === 'walked')[0].time}</Moment>
-             : 'N/A'  } 
-             <Button>
+            : 'N/A'  } 
+            <Button>
                 Update!
-             </Button><br />
-        Last Outside: {this.props.events.length > 1 ? 
+            </Button><br />
+        Last Outside: 
+            {(this.props.events.length > 1) && 
+                (this.props.events.filter(recentEvents => recentEvents.event_type === 'last outside').length > 0) ? 
                 <Moment format='LLLL'>{this.props.events.filter(recentEvents => recentEvents.event_type === 'last outside')[0].time}</Moment>
-             : 'N/A'  } 
-             <Button>
+            : 'N/A'  } 
+            <Button>
                 Update!
-             </Button><br />
+            </Button><br />
       </Typography>
       <Typography component="p">
         Breed: {this.props.petInfo.breed} <br />
