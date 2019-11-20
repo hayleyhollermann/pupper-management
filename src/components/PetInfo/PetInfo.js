@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import moment from 'moment';
+import moment from 'moment';
 import Moment from 'react-moment';
 import 'moment-timezone';
 import {Button, Paper, Typography} from '@material-ui/core';
@@ -14,8 +14,10 @@ class HomePage extends Component {
     this.props.dispatch({type: 'FETCH_PET', payload: petId})
   }
 
-  updateTimeForEvent = (eventToUpdate) => {
-    console.log(eventToUpdate)
+  addNewEvent = (eventToUpdate) => {
+    let timeOfEvent = moment().format()
+    console.log(eventToUpdate, timeOfEvent)
+    this.props.dispatch({type: 'ADD_EVENT', payload: {petId: this.props.petInfo.id, event_type: eventToUpdate, time: timeOfEvent}})
   }
 
 
@@ -27,31 +29,42 @@ class HomePage extends Component {
         {this.props.petInfo.name}
       </Typography>
       <Typography component="p">
-        
         Fed: 
             {(this.props.events.length > 1) && 
                 (this.props.events.filter(recentEvents => recentEvents.event_type === 'fed').length > 0) ? 
-                <Moment format='LLLL'>{this.props.events.filter(recentEvents => recentEvents.event_type === 'fed')[0].time}</Moment>
+                <Moment format='LLLL'>
+                    {this.props.events.filter(recentEvents => recentEvents.event_type === 'fed')[0].time}
+                </Moment>
             : 'N/A'  } 
-            <Button>
+            <Button onClick={ () => this.addNewEvent('fed')} >
                 Update!
-            </Button><br />
+            </Button>
+            <Button>See All</Button>
+            <br />
         Walked: 
             {(this.props.events.length > 1) && 
                 (this.props.events.filter(recentEvents => recentEvents.event_type === 'walked').length > 0) ?  
-                <Moment format='LLLL'>{this.props.events.filter(recentEvents => recentEvents.event_type === 'walked')[0].time}</Moment>
+                <Moment format='LLLL'>
+                    {this.props.events.filter(recentEvents => recentEvents.event_type === 'walked')[0].time}
+                </Moment>
             : 'N/A'  } 
-            <Button>
+            <Button onClick={ () => this.addNewEvent('walked')} >
                 Update!
-            </Button><br />
+            </Button>
+            <Button>See All</Button>
+            <br />
         Last Outside: 
             {(this.props.events.length > 1) && 
                 (this.props.events.filter(recentEvents => recentEvents.event_type === 'last outside').length > 0) ? 
-                <Moment format='LLLL'>{this.props.events.filter(recentEvents => recentEvents.event_type === 'last outside')[0].time}</Moment>
+                <Moment format='LLLL'>
+                    {this.props.events.filter(recentEvents => recentEvents.event_type === 'last outside')[0].time}
+                </Moment>
             : 'N/A'  } 
-            <Button>
+            <Button onClick={ () => this.addNewEvent('last outside')} >
                 Update!
-            </Button><br />
+            </Button>
+            <Button>See All</Button>
+            <br />
       </Typography>
       <Typography component="p">
         Breed: {this.props.petInfo.breed} <br />

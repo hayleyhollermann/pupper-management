@@ -59,6 +59,7 @@ router.get('/events/:id', rejectUnauthenticated, (req, res) => {
             res.send(results.rows)
         })
         .catch((err) => {
+            console.log('error in get /pets/events', err);
             res.sendStatus(500)
         })
 })
@@ -73,8 +74,24 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     .then(() => {
         res.sendStatus(200);
     })
-    .catch(() => {
+    .catch((err) => {
+        console.log('error adding a pet in POST /pets', err);
         res.sendStatus(500);
+    })
+})
+
+// ADD a new event for a pet 
+router.post('/events/:id', rejectUnauthenticated, (req, res) => {
+    console.log('in post /pets/events', req.params.id, req.body);
+    queryText = `INSERT INTO "pets_events" ("pets_id", "time", "events_id")
+    VALUES ($1, $2, (SELECT "id" FROM "events" WHERE "type" = $3));`
+    pool.query(queryText, [req.params.id, req.body.time, req.body.event_type])
+    .then(() => {
+        res.sendStatus(200);
+    })
+    .catch((err) => {
+        console.log('error adding an event in POST /pets/events', err);
+        res.sendStatus(500)
     })
 })
 

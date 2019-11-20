@@ -14,12 +14,15 @@ import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
 import AboutPage from '../AboutPage/AboutPage';
-import InfoPage from '../InfoPage/InfoPage';
+// import InfoPage from '../InfoPage/InfoPage';
 
 import './App.css';
 import HomePage from '../HomePage/HomePage';
 import PetInfo from '../PetInfo/PetInfo';
 import AddPet from '../AddPet/AddPet';
+import Settings from '../Settings/Settings';
+import AddUserToHousehold from '../AddUserToHousehold/AddUserToHousehold';
+import ChangeHousehold from '../ChangeHousehold/ChangeHousehold';
 
 class App extends Component {
   componentDidMount () {
@@ -54,11 +57,13 @@ class App extends Component {
             they will see the info page instead. */}
             <ProtectedRoute
               exact
-              path="/info"
-              component={InfoPage}
+              path="/settings"
+              component={Settings}
             />
             <ProtectedRoute exact path="/home/:id" component={PetInfo}/>
             <ProtectedRoute exact path="/add-pet/:id" component={AddPet}/>
+            <ProtectedRoute exact path="/add-hh-user" component={AddUserToHousehold}/>
+            <ProtectedRoute exact path="/change-household" component={ChangeHousehold}/>
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
