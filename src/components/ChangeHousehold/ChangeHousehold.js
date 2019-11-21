@@ -24,7 +24,6 @@ class ChangeHousehold extends Component {
     return (
       <div>
         <h3>Which household would you like to switch to?</h3>
-        <p>map through households that user is a part of, append them as buttons, when clicked, switches user.selected_id to that household, redirects to homepage</p>
           {this.props.usersHouseholds.map((household) =>
             <div key={household.id}><Button onClick={ () => this.switchHouseholds(household.id)}>{household.name}</Button><br/></div>
           )}

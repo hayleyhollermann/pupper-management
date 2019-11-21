@@ -10,6 +10,17 @@ const petEvents = (state=[], action) => {
     }
 };
 
+const householdPetsEvents = (state=[], action) => {
+    switch (action.type) {
+        case 'GET_HH_PETS':
+            console.log('in householdPetsEvents reducer');
+            return action.payload;
+        default:
+            return state;
+    }
+};
+
 export default combineReducers({
     petEvents,
+    householdPetsEvents
 });

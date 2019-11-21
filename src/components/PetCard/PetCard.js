@@ -18,8 +18,7 @@ class HomePage extends Component {
   }
 
   componentDidMount() {
-    // this.props.dispatch({type: 'FETCH_EVENTS', payload: this.props.pet.id})
-    // this.getAllTimes(this.props.events)
+    // this.props.dispatch({type: 'FETCH_HH_EVENTS'})
   }
 
 //   getAllTimes = (events) => {
@@ -69,6 +68,7 @@ class HomePage extends Component {
             <Button size='large' onClick={this.getPetInfo} ><PetsIcon /></Button>
           </CardActions>
         </Card>
+        <pre>{JSON.stringify(this.props.events)}</pre>
       </>
     )
   }
@@ -77,7 +77,8 @@ class HomePage extends Component {
 const mapStateToProps = state => ({
   user: state.user,
   pets: state.petsReducer.pets,
-  events: state.petEventsReducer.petEvents,
+  // events: state.petEventsReducer.petEvents,
+  householdEvents: state.petEventsReducer.householdPetsEvents,
 });
 
 export default connect(mapStateToProps)(withRouter(HomePage));

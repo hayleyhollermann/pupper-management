@@ -33,12 +33,22 @@ function* addNewPet (action) {
   }
 }
 
+function* allRecentEvents () {
+  console.log('in /hh-events');
+  try {
+    const allRecentResponse = yield axios.get('/pets/hh-events')
+    yield put({type: 'GET_HH_PETS', payload: allRecentResponse.data})
+  } catch(err) {
+    console.log('error getting recent events for all pets in household', err);
+  }
+}
 
 
 function* petsInHouseholdsSaga() {
   yield takeLatest('FETCH_PETS', getPets)
   yield takeLatest('FETCH_PET', getPetInfo)
   yield takeLatest('ADD_PET', addNewPet)
+  yield takeLatest('FETCH_HH_EVENTS', allRecentEvents)
 }
 
 export default petsInHouseholdsSaga;

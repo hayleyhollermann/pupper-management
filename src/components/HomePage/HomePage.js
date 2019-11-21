@@ -13,8 +13,7 @@ class HomePage extends Component {
   }
 
   componentDidMount() {
-    // this.props.dispatch({ type: 'FETCH_HOUSEHOLDS' });
-    // this.props.dispatch({ type: 'FETCH_EVENTS', payload: this.props.user.selected_household_id })
+    this.props.dispatch({type: 'FETCH_HH_EVENTS'})
     this.props.dispatch({ type: 'FETCH_PETS' });
   }
 
@@ -34,15 +33,14 @@ class HomePage extends Component {
         <div>
           <h2>The id of your household is: {this.props.user.selected_household_id}</h2>
             {this.props.pets.map((pet) => 
-              <PetCard key={pet.id} pet={pet} />
+              <PetCard key={pet.id} pet={pet}
+              events = {this.props.householdEvents && this.props.householdEvents.length > 1 ? this.props.householdEvents.filter(recentEvents => recentEvents.id === pet.id)
+              : 'nothing!!' } />
             )}
           <Button size='large' onClick={this.addAPetForm}>
             <AddRoundedIcon /> Add a Pet
           </Button>
-          {/* <p>you belong to these households:</p>
-          <ul> {this.props.usersHouseholds.map((household) =>
-            <li key={household.id}>{household.name}</li>
-          )}</ul> */}
+          <pre>{JSON.stringify(this.props.householdEvents)}</pre>
         </div>
         : <h2>Get started by creating a household!</h2>
         }
@@ -59,6 +57,7 @@ const mapStateToProps = state => ({
   // usersHouseholds: state.usersHouseholds.usersHouseholds, //why?????
   pets: state.petsReducer.pets,
   events: state.petEventsReducer.petEvents,
+  householdEvents: state.petEventsReducer.householdPetsEvents,
 });
 
 // this allows us to use <App /> in index.js

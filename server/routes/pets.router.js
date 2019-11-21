@@ -45,15 +45,15 @@ router.get('/petInfo/:id', rejectUnauthenticated, (req, res) => {
             res.sendStatus(500)
         })
 })
-// GET all events for a given pet
+// GET recent events for a given pet
 router.get('/events/:id', rejectUnauthenticated, (req, res) => {
     console.log('in get /pets/events', req.params.id);
-    queryText = `SELECT max("pets_events"."time") AS "time",  "pets"."id", "pets"."name", "events"."type" AS "event_type", "medications"."type", "medications"."id" FROM "pets_events" 
+    queryText = `SELECT max("pets_events"."time") AS "time",  "pets"."id", "pets"."name", "events"."type" AS "event_type", "medications"."type", "medications"."id"  AS "med_id" FROM "pets_events" 
         JOIN "events" ON "events"."id"="pets_events"."events_id"
         JOIN "pets" ON "pets"."id"="pets_events"."pets_id"
-        LEFT OUTER JOIN "medications" ON "medications"."id"="pets_events"."medications_id"
+        LEFT OUTER JOIN "medications" ON "med_id"="pets_events"."medications_id"
         WHERE ("pets"."id"=$1)
-        GROUP BY "pets"."id", "events"."type", "pets"."name", "events"."type", "medications"."type", "medications"."id";`
+        GROUP BY "pets"."id", "events"."type", "pets"."name", "events"."type", "medications"."type", "med_id";`
     pool.query(queryText, [req.params.id])
         .then((results) => {
             res.send(results.rows)
@@ -61,6 +61,24 @@ router.get('/events/:id', rejectUnauthenticated, (req, res) => {
         .catch((err) => {
             console.log('error in get /pets/events', err);
             res.sendStatus(500)
+        })
+})
+// GET recent events for all pets in househiold
+router.get('/hh-events', rejectUnauthenticated, (req, res) => {
+    console.log('in /hh-events', req.user.selected_household_id);
+    queryText = `SELECT max("pets_events"."time") AS "time",  "pets"."id", "pets"."name", "events"."type" AS "event_type", "medications"."type", "medications"."id" AS "med_id" FROM "pets_events" 
+        JOIN "events" ON "events"."id"="pets_events"."events_id"
+        JOIN "pets" ON "pets"."id"="pets_events"."pets_id"
+        JOIN "households" ON "pets"."households_id" = "households"."id"
+        LEFT OUTER JOIN "medications" ON "medications"."id"="pets_events"."medications_id"
+        WHERE ("households"."id"=$1)
+        GROUP BY "pets"."id", "events"."type", "pets"."name", "events"."type", "medications"."type", "med_id";`
+    pool.query(queryText, [req.user.selected_household_id])
+        .then((results) => {
+            res.send(results.rows)
+        })
+        .catch((err) => {
+            console.log('error in get /pets/hh-events', err);
         })
 })
 
@@ -79,7 +97,6 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         res.sendStatus(500);
     })
 })
-
 // ADD a new event for a pet 
 router.post('/events/:id', rejectUnauthenticated, (req, res) => {
     console.log('in post /pets/events', req.params.id, req.body);
