@@ -28,9 +28,6 @@ class AddUserToHousehold extends Component {
 
 const mapStateToProps = state => ({
   user: state.user,
-  usersHouseholds: state.usersHouseholds.usersHouseholds, 
-  pets: state.petsReducer.pets,
-  events: state.petEventsReducer.petEvents,
 });
 
 export default connect(mapStateToProps)(withRouter(AddUserToHousehold));

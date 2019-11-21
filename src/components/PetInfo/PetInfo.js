@@ -80,9 +80,6 @@ class HomePage extends Component {
         } <br />
       </Typography>
     </Paper>
-    <pre>{JSON.stringify(this.props.events.filter(recentEvents => recentEvents.event_type === 'fed')[0])}</pre>
-    {/* <pre>{JSON.stringify(this.props.petInfo)}</pre>
-    <pre>{JSON.stringify(this.props.events)}</pre> */}
       </>
     )
   }

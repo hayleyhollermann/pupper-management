@@ -8,9 +8,6 @@ import { withRouter } from 'react-router-dom';
 
 
 class HomePage extends Component {
-  state = {
-
-  }
 
   componentDidMount() {
     this.props.dispatch({type: 'FETCH_HH_EVENTS'})
@@ -18,9 +15,11 @@ class HomePage extends Component {
   }
 
   addAPetForm = () => {
-    console.log('button to add pet to', this.props.user.selected_household_id);
-    
     this.props.history.push(`/add-pet/${this.props.user.selected_household_id}`)
+  }
+
+  createHousehold = () => {
+    this.props.history.push(`/create-household`)
   }
 
   render() {
@@ -42,7 +41,13 @@ class HomePage extends Component {
           </Button>
           <pre>{JSON.stringify(this.props.householdEvents)}</pre>
         </div>
-        : <h2>Get started by creating a household!</h2>
+        : 
+        <div>
+          <h2>Get started by creating a household!</h2>
+          <Button size='large' onClick={this.createHousehold}>
+            <AddRoundedIcon /> Create a Household
+          </Button>
+        </div>
         }
       </div>
     )

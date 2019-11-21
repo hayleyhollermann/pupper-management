@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import moment from 'moment';
 import Moment from 'react-moment';
 import 'moment-timezone';
 import Card from '@material-ui/core/Card';
@@ -19,34 +18,6 @@ class HomePage extends Component {
     walked: 'never walked',
     last_outside: 'never been outside'
   }
-
-  componentDidMount() {
-    // this.props.dispatch({type: 'FETCH_HH_EVENTS'})
-  }
-
-//   getAllTimes = (events) => {
-//     const eventsForPet = events.filter(event => event.name === this.props.pet.pet_name)
-//     console.log(this.props.pet.pet_name, ':', eventsForPet);
-//     // this.setTimes(eventsForPet);
-//     // for (let i = 0; i < eventsForPet; i++){
-//     //     console.log('in for loop');
-        
-//     // }
-//   }
-
-//   setTimes = (events) => {
-    
-//     // const lastFed = events.filter(event => event.event_type === 'fed');
-//     // const lastWalked = events.filter(event => event.event_type === 'walked');
-//     // const lastOutside = events.filter(event => event.event_type === 'last outside');
-//     // console.log(this.props.pet.pet_name, ': last fed:', ...lastFed, 'last walked:', ...lastWalked, 'last outside:', ...lastOutside);
-//     // this.setState({
-//     //     ...this.state,
-//     //     fed: lastFed[0].time,
-//     //     walked: lastWalked[0].time,
-//     //     last_outside: lastOutside[0].time
-//     // })
-//   }
 
   getPetInfo = () => {
     console.log('getting info for:', this.props.pet.pet_name);
