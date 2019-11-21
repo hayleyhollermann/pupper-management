@@ -17,6 +17,7 @@ class ChangeHousehold extends Component {
   switchHouseholds = (id) => {
     console.log(id);
     this.props.dispatch({type: 'CHANGE_HOUSEHOLD', payload: {selected_id: id}})
+    this.props.history.push('/home')
   }
 
   render() {
