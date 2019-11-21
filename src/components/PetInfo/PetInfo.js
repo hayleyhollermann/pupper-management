@@ -30,7 +30,7 @@ class HomePage extends Component {
       </Typography>
       <Typography component="p">
         Fed: 
-            {(this.props.events.length > 1) && 
+            {(this.props.events.length > 0) && 
                 (this.props.events.filter(recentEvents => recentEvents.event_type === 'fed').length > 0) ? 
                 <Moment format='LLLL'>
                     {this.props.events.filter(recentEvents => recentEvents.event_type === 'fed')[0].time}
@@ -42,7 +42,7 @@ class HomePage extends Component {
             <Button>See All</Button>
             <br />
         Walked: 
-            {(this.props.events.length > 1) && 
+            {(this.props.events.length > 0) && 
                 (this.props.events.filter(recentEvents => recentEvents.event_type === 'walked').length > 0) ?  
                 <Moment format='LLLL'>
                     {this.props.events.filter(recentEvents => recentEvents.event_type === 'walked')[0].time}
@@ -54,7 +54,7 @@ class HomePage extends Component {
             <Button>See All</Button>
             <br />
         Last Outside: 
-            {(this.props.events.length > 1) && 
+            {(this.props.events.length > 0) && 
                 (this.props.events.filter(recentEvents => recentEvents.event_type === 'last outside').length > 0) ? 
                 <Moment format='LLLL'>
                     {this.props.events.filter(recentEvents => recentEvents.event_type === 'last outside')[0].time}

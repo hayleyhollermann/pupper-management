@@ -12,12 +12,23 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     JOIN "user" ON "user"."id"="households_users"."users_id"
     WHERE "user"."id"=$1;`;
     pool.query(queryText, [req.user.id])
-        .then(results => res.send(results.rows))
-        .catch(error => {
-            console.log('Error making SELECT for /user-households:', error);
+        .then((results) => res.send(results.rows))
+        .catch(err => {
+            console.log('Error making SELECT for /user-households:', err);
             res.sendStatus(500);
         });
 });
 
+router.put('/', rejectUnauthenticated, (req, res) => {
+    console.log('user:', req.user, 'hh id:', req.body.selected_id); // need req.body.id??
+    queryText=`UPDATE "user" 
+        SET "selected_household_id" = $1
+        WHERE "id"=$2;`
+    pool.query(queryText, [req.body.selected_id, req.user.id])
+        .then(() => res.sendStatus(200))
+        .catch((err) => {
+            console.log('error changing household :', err)
+        })
+})
 
 module.exports = router;

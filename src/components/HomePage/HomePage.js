@@ -13,7 +13,7 @@ class HomePage extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch({ type: 'FETCH_HOUSEHOLDS' });
+    // this.props.dispatch({ type: 'FETCH_HOUSEHOLDS' });
     // this.props.dispatch({ type: 'FETCH_EVENTS', payload: this.props.user.selected_household_id })
     this.props.dispatch({ type: 'FETCH_PETS' });
   }
@@ -39,10 +39,10 @@ class HomePage extends Component {
           <Button size='large' onClick={this.addAPetForm}>
             <AddRoundedIcon /> Add a Pet
           </Button>
-          <p>you belong to these households:</p>
+          {/* <p>you belong to these households:</p>
           <ul> {this.props.usersHouseholds.map((household) =>
             <li key={household.id}>{household.name}</li>
-          )}</ul>
+          )}</ul> */}
         </div>
         : <h2>Get started by creating a household!</h2>
         }
@@ -56,7 +56,7 @@ class HomePage extends Component {
 // const mapStateToProps = ({user}) => ({ user });
 const mapStateToProps = state => ({
   user: state.user,
-  usersHouseholds: state.usersHouseholds.usersHouseholds, //why?????
+  // usersHouseholds: state.usersHouseholds.usersHouseholds, //why?????
   pets: state.petsReducer.pets,
   events: state.petEventsReducer.petEvents,
 });
