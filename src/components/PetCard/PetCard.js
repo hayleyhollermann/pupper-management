@@ -13,12 +13,6 @@ import PetsIcon from '@material-ui/icons/Pets';
 
 class HomePage extends Component {
 
-  state = {
-    fed: 'never fed',
-    walked: 'never walked',
-    last_outside: 'never been outside'
-  }
-
   getPetInfo = () => {
     console.log('getting info for:', this.props.pet.pet_name);
     this.props.history.push(`/home/${this.props.pet.id}`)
@@ -60,7 +54,6 @@ class HomePage extends Component {
             <Button size='large' onClick={this.getPetInfo} ><PetsIcon /></Button>
           </CardActions>
         </Card>
-        <pre>{JSON.stringify(this.props.events)}</pre>
       </>
     )
   }

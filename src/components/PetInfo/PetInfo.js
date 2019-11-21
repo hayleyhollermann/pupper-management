@@ -20,7 +20,6 @@ class HomePage extends Component {
     this.props.dispatch({type: 'ADD_EVENT', payload: {petId: this.props.petInfo.id, event_type: eventToUpdate, time: timeOfEvent}})
   }
 
-
   render() {
     return (
       <>

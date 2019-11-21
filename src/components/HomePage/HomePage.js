@@ -39,7 +39,6 @@ class HomePage extends Component {
           <Button size='large' onClick={this.addAPetForm}>
             <AddRoundedIcon /> Add a Pet
           </Button>
-          <pre>{JSON.stringify(this.props.householdEvents)}</pre>
         </div>
         : 
         <div>

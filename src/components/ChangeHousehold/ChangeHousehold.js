@@ -23,7 +23,7 @@ class ChangeHousehold extends Component {
   render() {
     return (
       <div>
-        <h3>Which household would you like to switch to?</h3>
+        <h3>Which household would you like to view?</h3>
           {this.props.usersHouseholds.map((household) =>
             <div key={household.id}><Button onClick={ () => this.switchHouseholds(household.id)}>{household.name}</Button><br/></div>
           )}

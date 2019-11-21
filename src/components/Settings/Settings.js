@@ -7,10 +7,6 @@ import { withRouter } from 'react-router-dom';
 
 class Settings extends Component {
 
-  componentDidMount() {
-
-  }
-
   addUserForm = () => {
     this.props.history.push("/add-hh-user")
   }
@@ -24,7 +20,6 @@ class Settings extends Component {
       <div>
           <Button onClick={this.addUserForm}>ADD USER TO HOUSEHOLD</Button>
           <Button onClick={this.switchHouseholdsForm}>SWITCH HOUSEHOLDS</Button>
-
           {/* {/* stretch */}
           {/* <Button>EDIT ACCOUNT INFO</Button> 
           <Button>LOG OUT</Button>  */}

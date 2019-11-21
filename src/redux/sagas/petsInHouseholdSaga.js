@@ -1,6 +1,7 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
+// gets all pets for selected household
 function* getPets () {
   console.log('in getPets');
   try {
@@ -11,7 +12,7 @@ function* getPets () {
       console.log('error fetching pets in petsResponse', err);
   }
 }
-
+// gets all info on selected pet 
 function* getPetInfo (action) {
   console.log('in getPetInfo');
   try {
@@ -22,7 +23,7 @@ function* getPetInfo (action) {
     console.log('error fetching info on this pet in getPetInfo', err);
   }
 }
-
+// adds a new pet to selected household
 function* addNewPet (action) {
   console.log('in addNewPet Saga', action.payload);
   try {
@@ -32,7 +33,7 @@ function* addNewPet (action) {
     console.log('error adding pets to household', err);
   }
 }
-
+// gets all recent events for all pets in a household
 function* allRecentEvents () {
   console.log('in /hh-events');
   try {
@@ -42,7 +43,6 @@ function* allRecentEvents () {
     console.log('error getting recent events for all pets in household', err);
   }
 }
-
 
 function* petsInHouseholdsSaga() {
   yield takeLatest('FETCH_PETS', getPets)
