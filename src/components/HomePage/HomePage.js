@@ -35,7 +35,7 @@ class HomePage extends Component {
             {this.props.pets.map((pet) => 
               <PetCard key={pet.id} pet={pet}
               events = {this.props.householdEvents && this.props.householdEvents.length > 1 ? this.props.householdEvents.filter(recentEvents => recentEvents.id === pet.id)
-              : 'nothing!!' } />
+              : [] } />
             )}
           <Button size='large' onClick={this.addAPetForm}>
             <AddRoundedIcon /> Add a Pet

@@ -51,7 +51,7 @@ router.get('/events/:id', rejectUnauthenticated, (req, res) => {
     queryText = `SELECT max("pets_events"."time") AS "time",  "pets"."id", "pets"."name", "events"."type" AS "event_type", "medications"."type", "medications"."id"  AS "med_id" FROM "pets_events" 
         JOIN "events" ON "events"."id"="pets_events"."events_id"
         JOIN "pets" ON "pets"."id"="pets_events"."pets_id"
-        LEFT OUTER JOIN "medications" ON "med_id"="pets_events"."medications_id"
+        LEFT OUTER JOIN "medications" ON "medications"."id"="pets_events"."medications_id"
         WHERE ("pets"."id"=$1)
         GROUP BY "pets"."id", "events"."type", "pets"."name", "events"."type", "medications"."type", "med_id";`
     pool.query(queryText, [req.params.id])
