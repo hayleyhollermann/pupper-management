@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PetCard from '../PetCard/PetCard';
-import {Button} from '@material-ui/core';
+import {Fab} from '@material-ui/core';
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
 import { withRouter } from 'react-router-dom';
 
@@ -35,17 +35,17 @@ class HomePage extends Component {
               <PetCard key={pet.id} pet={pet}
               events = {this.props.householdEvents && this.props.householdEvents.length > 1 ? this.props.householdEvents.filter(recentEvents => recentEvents.id === pet.id)
               : [] } />
-            )}
-          <Button size='large' onClick={this.addAPetForm}>
+            )} <br />
+          <Fab variant="extended" size='large' onClick={this.addAPetForm}>
             <AddRoundedIcon /> Add a Pet
-          </Button>
+          </Fab>
         </div>
         : 
         <div>
           <h2>Get started by creating a household!</h2>
-          <Button size='large' onClick={this.createHousehold}>
+          <Fab variant="extended" size='large' onClick={this.createHousehold}>
             <AddRoundedIcon /> Create a Household
-          </Button>
+          </Fab>
         </div>
         }
       </div>
