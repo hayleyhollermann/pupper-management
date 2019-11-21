@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Button, Input } from '@material-ui/core';
+import { Button, TextField } from '@material-ui/core';
+import swal from 'sweetalert';
 
 
 
@@ -41,9 +42,11 @@ class AddPet extends Component {
   }
 
   SumbitPet = () => {
-    // console.log(this.props.match.params.id);
-    this.props.dispatch({type: 'ADD_PET', payload: this.state.newPet})
-    this.props.history.push('/home')
+    this.props.dispatch({type: 'ADD_PET', payload: this.state.newPet});
+    swal("Done!", `Added ${this.state.newPet.name} to your household!`, "success")
+    .then(() => {
+      this.props.history.push('/home');
+    });
   }
 
   render() {
@@ -52,16 +55,16 @@ class AddPet extends Component {
         { !this.state.showPt2 ? 
             <div>
               <h1>General Info</h1>
-              <Input placeholder="Name" fullWidth={true} value={this.state.newPet.name}
+              <TextField margin="dense" variant="outlined" label="Name" fullWidth={true} value={this.state.newPet.name}
                 onChange={ (event)=> this.editNewPet('name', event)}
               /> 
-              <Input placeholder="Breed" fullWidth={true} value={this.state.newPet.breed}
+              <TextField margin="dense" variant="outlined" label="Breed" fullWidth={true} value={this.state.newPet.breed}
                 onChange={ (event)=> this.editNewPet('breed', event)}
               /> 
-              <Input placeholder="Weight" fullWidth={true} value={this.state.newPet.weight}
+              <TextField margin="dense" variant="outlined" label="Weight (lbs)" fullWidth={true} value={this.state.newPet.weight}
                 onChange={ (event)=> this.editNewPet('weight', event)}
               />  
-              <Input placeholder="Age" fullWidth={true} value={this.state.newPet.age}
+              <TextField margin="dense" variant="outlined" label="Age (years)" fullWidth={true} value={this.state.newPet.age}
                 onChange={ (event)=> this.editNewPet('age', event)}
               /> 
               <Button onClick={this.addPetPart2}>NEXT</Button>
@@ -69,27 +72,25 @@ class AddPet extends Component {
           : 
           <div>
              <h1>Vet Info</h1>
-             <Input placeholder="Vet Name" fullWidth={true} value={this.state.newPet.vetName}
+             <TextField margin="dense" variant="outlined" label="Vet Name" fullWidth={true} value={this.state.newPet.vetName}
                 onChange={ (event)=> this.editNewPet('vetName', event)}
               />  
-             <Input placeholder="Vet Phone" fullWidth={true} value={this.state.newPet.vetPhone}
+             <TextField margin="dense" variant="outlined" label="Vet Phone" fullWidth={true} value={this.state.newPet.vetPhone}
                 onChange={ (event)=> this.editNewPet('vetPhone', event)}
               />  
              <h1>Medications</h1>
-             <Input placeholder="Medication Name" fullWidth={true} value={this.state.newPet.medName}
+             <TextField margin="dense" variant="outlined" label="Medication Name" fullWidth={true} value={this.state.newPet.medName}
                 onChange={ (event)=> this.editNewPet('medName', event)}
               />  
-             <Input placeholder="Amount" fullWidth={true} value={this.state.newPet.medAmount}
+             <TextField margin="dense" variant="outlined" label="Amount" fullWidth={true} value={this.state.newPet.medAmount}
                 onChange={ (event)=> this.editNewPet('medAmount', event)}
               />  
-             <Input placeholder="Frequency" fullWidth={true} value={this.state.newPet.medFreq}
+             <TextField margin="dense" variant="outlined" label="Frequency" fullWidth={true} value={this.state.newPet.medFreq}
                 onChange={ (event)=> this.editNewPet('medFreq', event)}
               /> 
-
              <Button onClick={this.SumbitPet}>Submit</Button>
           </div>
         }
-        <pre>{JSON.stringify(this.state)}</pre>
       </>
     )
   }

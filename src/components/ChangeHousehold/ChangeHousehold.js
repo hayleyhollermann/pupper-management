@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {Button} from '@material-ui/core';
 import { withRouter } from 'react-router-dom';
+import swal from 'sweetalert';
 
 
 
@@ -14,10 +15,12 @@ class ChangeHousehold extends Component {
     this.props.dispatch({ type: 'FETCH_HOUSEHOLDS' });
   }
 
-  switchHouseholds = (id) => {
-    console.log(id);
-    this.props.dispatch({type: 'CHANGE_HOUSEHOLD', payload: {selected_id: id}})
-    this.props.history.push('/home')
+  switchHouseholds = (household) => {
+    this.props.dispatch({type: 'CHANGE_HOUSEHOLD', payload: {selected_id: household.id}})
+    swal("Awesome!", `Switching to ${household.name}!`)
+    .then(() => {
+      this.props.history.push('/home');
+    });
   }
 
   render() {
@@ -25,7 +28,7 @@ class ChangeHousehold extends Component {
       <div>
         <h3>Which household would you like to view?</h3>
           {this.props.usersHouseholds.map((household) =>
-            <div key={household.id}><Button onClick={ () => this.switchHouseholds(household.id)}>{household.name}</Button><br/></div>
+            <div key={household.id}><Button onClick={ () => this.switchHouseholds(household)}>{household.name}</Button><br/></div>
           )}
       </div>
     )

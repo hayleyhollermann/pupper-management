@@ -23,6 +23,8 @@ class HomePage extends Component {
   render() {
     return (
       <>
+      {this.props.petInfo ? 
+      (
     <Paper className="petInfoPaper" elevation={3}>
       <Typography variant="h4" component="h3">
         {this.props.petInfo.name}
@@ -78,7 +80,9 @@ class HomePage extends Component {
             : 'No vet phone on file'        
         } <br />
       </Typography>
-    </Paper>
+    </Paper>) :
+      (<h1>this is not your pet!</h1>)
+      }
       </>
     )
   }
