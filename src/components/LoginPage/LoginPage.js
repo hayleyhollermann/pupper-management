@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {Fab, Typography, Paper, TextField} from '@material-ui/core';
+
 
 class LoginPage extends Component {
   state = {
@@ -40,12 +42,16 @@ class LoginPage extends Component {
             {this.props.errors.loginMessage}
           </h2>
         )}
+        <div className="logInReg">
+        <Paper elevation={5}>
         <form onSubmit={this.login}>
           <h1>Login</h1>
           <div>
             <label htmlFor="username">
-              Username:
-              <input
+              Username:<br/>
+              <TextField
+                margin="dense"
+                variant="outlined"
                 type="text"
                 name="username"
                 value={this.state.username}
@@ -55,8 +61,10 @@ class LoginPage extends Component {
           </div>
           <div>
             <label htmlFor="password">
-              Password:
-              <input
+              Password:<br/>
+              <TextField
+                margin="dense"
+                variant="outlined"
                 type="password"
                 name="password"
                 value={this.state.password}
@@ -73,6 +81,8 @@ class LoginPage extends Component {
             />
           </div>
         </form>
+        </ Paper>
+        </div>
         <center>
           <button
             type="button"

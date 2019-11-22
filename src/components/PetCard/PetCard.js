@@ -3,11 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Moment from 'react-moment';
 import 'moment-timezone';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import {Fab} from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
+import {Fab, Typography, CardContent, CardActions, Card} from '@material-ui/core';
 import PetsIcon from '@material-ui/icons/Pets';
 
 
@@ -20,8 +16,8 @@ class HomePage extends Component {
 
   render() {
     return (
-      <>
-        <Card >
+      <div className="cardDiv">
+        <Card elevation={5}>
           <CardContent>
             <Typography color="textPrimary" variant="h4" gutterBottom>
               {this.props.pet.pet_name}
@@ -54,7 +50,7 @@ class HomePage extends Component {
             <Fab size='large' onClick={this.getPetInfo} ><PetsIcon /></Fab>
           </CardActions>
         </Card>
-      </>
+      </div>
     )
   }
 }

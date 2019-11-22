@@ -30,7 +30,7 @@ class HomePage extends Component {
         </h1>
         { this.props.user.selected_household_id ? 
         <div>
-          <h2>The id of your household is: {this.props.user.selected_household_id}</h2>
+          {/* <h2>The id of your household is: {this.props.user.selected_household_id}</h2> */}
             {this.props.pets.map((pet) => 
               <PetCard key={pet.id} pet={pet}
               events = {this.props.householdEvents && this.props.householdEvents.length > 1 ? this.props.householdEvents.filter(recentEvents => recentEvents.id === pet.id)

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {Button} from '@material-ui/core';
+import {Button, Paper} from '@material-ui/core';
 import { withRouter } from 'react-router-dom';
 import swal from 'sweetalert';
 
@@ -25,11 +25,13 @@ class ChangeHousehold extends Component {
 
   render() {
     return (
-      <div>
-        <h3>Which household would you like to view?</h3>
+      <div className="paperDiv">
+        <Paper className="changeHousehold" elevation={5}>
+          <h3>Which household would you like to view?</h3>
           {this.props.usersHouseholds.map((household) =>
             <div key={household.id}><Button onClick={ () => this.switchHouseholds(household)}>{household.name}</Button><br/></div>
           )}
+        </Paper>
       </div>
     )
   }
