@@ -34,7 +34,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 // GET all info on a given pet
 router.get('/petInfo/:id', rejectUnauthenticated, (req, res) => {
     console.log('in get /pets/petInfo', req.params.id);
-    queryText = `SELECT * FROM "pets"
+    queryText = `SELECT "pets".*, "households_users"."users_id" FROM "pets"
     JOIN "households_users" ON "households_users"."households_id" = "pets"."households_id"
     WHERE "pets"."id" = $1 AND "households_users"."users_id" = $2;`
     pool.query(queryText, [req.params.id, req.user.id])

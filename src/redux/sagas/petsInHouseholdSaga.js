@@ -14,7 +14,7 @@ function* getPets () {
 }
 // gets all info on selected pet 
 function* getPetInfo (action) {
-  console.log('in getPetInfo');
+  console.log('in getPetInfo', action.payload);
   try {
     const petInfoResponse = yield axios.get(`/pets/petInfo/${action.payload}`);
     console.log('response in getPetInfo', petInfoResponse.data);

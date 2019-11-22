@@ -8,8 +8,9 @@ import {Button, Paper, Typography} from '@material-ui/core';
 
 class HomePage extends Component {
 
-  componentDidMount () {
+  componentDidMount () {    
     let petId = this.props.match.params.id
+    console.log('petId =');
     this.props.dispatch({type: 'FETCH_EVENTS', payload: petId})
     this.props.dispatch({type: 'FETCH_PET', payload: petId})
   }
@@ -83,6 +84,7 @@ class HomePage extends Component {
     </Paper>) :
       (<h1>this is not your pet!</h1>)
       }
+      <pre>{JSON.stringify(this.props.petInfo)}</pre>
       </div>
     )
   }
