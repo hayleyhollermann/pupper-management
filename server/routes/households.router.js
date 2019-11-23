@@ -42,7 +42,18 @@ router.post('/', rejectUnauthenticated, (req, res) => {
             queryText2 = `INSERT INTO "households_users" ("households_id", "users_id", "is_admin")
                 VALUES ((SELECT "id" FROM "households" WHERE "name"=$1), $2, 'true');`;
             pool.query(queryText2, [req.body.householdName, req.user.id])
-            .then(() => res.sendStatus(200))
+            .then(() => {
+                // changes selected_household_id to newly created household
+                queryText3=`UPDATE "user"
+                    SET "selected_household_id"=(SELECT "id" FROM "households" WHERE "name"=$1)
+                    WHERE "id"=$2;`;
+                pool.query(queryText3, [req.body.householdName, req.user.id])
+                    .then(() => res.sendStatus(200))
+                    .catch((err) => {
+                        console.log('error in 3rd query of POST /households', err);
+                        res.sendStatus(500)
+                    })
+            })
             .catch((err) =>{
                 console.log('error in 2nd query of POST /households', err);
                 res.sendStatus(500)
