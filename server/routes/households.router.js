@@ -14,7 +14,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     pool.query(queryText, [req.user.id])
         .then((results) => res.send(results.rows))
         .catch(err => {
-            console.log('Error making SELECT for /user-households:', err);
+            console.log('Error making SELECT for /households:', err);
             res.sendStatus(500);
         });
 });
@@ -27,7 +27,7 @@ router.put('/', rejectUnauthenticated, (req, res) => {
     pool.query(queryText, [req.body.selected_id, req.user.id])
         .then(() => res.sendStatus(200))
         .catch((err) => {
-            console.log('error changing household :', err)
+            console.log('error changing household in PUT /households', err)
             res.sendStatus(500)
         })
 })
@@ -44,12 +44,24 @@ router.post('/', rejectUnauthenticated, (req, res) => {
             pool.query(queryText2, [req.body.householdName, req.user.id])
             .then(() => res.sendStatus(200))
             .catch((err) =>{
-                console.log('error in 2nd query of POST /user-households', err);
+                console.log('error in 2nd query of POST /households', err);
                 res.sendStatus(500)
             })
         })
         .catch((err) =>{
-            console.log('error in first query of POST /user-households', err);
+            console.log('error in first query of POST /households', err);
+            res.sendStatus(500)
+        })
+})
+
+router.post('/users', rejectUnauthenticated, (req, res) => {
+    queryText = `INSERT INTO "households_users" ("households_id", "users_id", "is_admin")
+        VALUES ($1, (SELECT "id" FROM "user" 
+        WHERE "username"=$2), 'false');`
+    pool.query(queryText, [req.user.selected_household_id, req.body.userToAdd])
+        .then(() => res.sendStatus(200))
+        .catch((err) => {
+            console.log('error in POST /households/users', err);
             res.sendStatus(500)
         })
 })

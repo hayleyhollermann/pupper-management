@@ -84,7 +84,7 @@ class HomePage extends Component {
     </Paper>) :
       (<h1>this is not your pet!</h1>)
       }
-      <pre>{JSON.stringify(this.props.petInfo)}</pre>
+      {/* <pre>{JSON.stringify(this.props.petInfo)}</pre> */}
       </div>
     )
   }
