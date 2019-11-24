@@ -67,6 +67,13 @@ class HomePage extends Component {
             </Button>
             <Button>See All</Button>
             <br />
+        Medications: 
+        {(this.props.events.length > 0) && 
+                (this.props.events.filter(recentEvents => recentEvents.event_type === 'medication').length > 0) ? 
+                  this.props.events.filter(recentEvents => recentEvents.event_type === 'medication').map((med) => 
+                    <p>{med.type}: <Moment format='LLLL' key={med.id}>{med.time}</Moment></p>
+                  )
+            : 'N/A'  } 
       </Typography>
       <Typography component="p">
         Breed: {this.props.petInfo.breed} <br />
@@ -85,6 +92,7 @@ class HomePage extends Component {
       (<h1>this is not your pet!</h1>)
       }
       {/* <pre>{JSON.stringify(this.props.petInfo)}</pre> */}
+      <pre>{JSON.stringify(this.props.events.filter(recentEvents => recentEvents.event_type === 'medication'), null, 2)}</pre>
       </div>
     )
   }
