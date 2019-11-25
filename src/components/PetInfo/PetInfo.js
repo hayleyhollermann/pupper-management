@@ -21,6 +21,12 @@ class HomePage extends Component {
     this.props.dispatch({type: 'ADD_EVENT', payload: {petId: this.props.petInfo.id, event_type: eventToUpdate, time: timeOfEvent}})
   }
 
+  addNewMedEvent = (medToUpdate) => {
+    let timeOfEvent = moment().format()
+    console.log(medToUpdate, timeOfEvent)
+    this.props.dispatch({type: 'ADD_MED_EVENT', payload: {petId: this.props.petInfo.id, med_type: medToUpdate, time: timeOfEvent}})
+  }
+
   render() {
     return (
       <div className="paperDiv">
@@ -68,10 +74,16 @@ class HomePage extends Component {
             <Button>See All</Button>
             <br />
         Medications: 
-        {(this.props.events.length > 0) && 
+
+            {(this.props.events.length > 0) && 
                 (this.props.events.filter(recentEvents => recentEvents.event_type === 'medication').length > 0) ? 
                   this.props.events.filter(recentEvents => recentEvents.event_type === 'medication').map((med) => 
-                    <p>{med.type}: <Moment format='LLLL' key={med.id}>{med.time}</Moment></p>
+                    <li key={med.med_id}>{med.type}: <Moment format='LLLL'>{med.time}</Moment>
+                      <Button onClick={ () => this.addNewMedEvent(med.med_id)} >
+                        Update!
+                      </Button>
+                      <Button>See All</Button>
+                    </li>
                   )
             : 'N/A'  } 
       </Typography>

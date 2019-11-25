@@ -113,5 +113,19 @@ router.post('/events/:id', rejectUnauthenticated, (req, res) => {
     })
 })
 
+router.post('/events/meds/:id', rejectUnauthenticated, (req, res) => {
+    console.log('in post /pets/events', req.params.id, req.body);
+    queryText = `INSERT INTO "pets_events" ("pets_id", "time", "events_id", "medications_id")
+    VALUES ($1, $2, $3, $4);`
+    pool.query(queryText, [req.params.id, req.body.time, '4', req.body.med_type])
+    .then(() => {
+        res.sendStatus(200);
+    })
+    .catch((err) => {
+        console.log('error adding an event in POST /pets/events/meds', err);
+        res.sendStatus(500)
+    })
+})
+
 
 module.exports = router;
