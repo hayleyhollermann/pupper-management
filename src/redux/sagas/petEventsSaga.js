@@ -26,7 +26,7 @@ function* addMedEvent (action) {
   console.log('in addMedEvent', action.payload);
   try {
     yield axios.post(`/pets/events/meds/${action.payload.petId}`, action.payload)
-    yield put({type: 'FETCH_EVENTS', payload: action.payload.petId})
+    // yield put({type: 'FETCH_EVENTS', payload: action.payload.petId})
   } catch (err) {
     console.log('error adding event in addPetEvent Saga', err);
   }

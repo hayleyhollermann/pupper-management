@@ -24,7 +24,7 @@ class HomePage extends Component {
   }
 
   editPetInfo = () => {
-
+    this.props.history.push(`/edit-pet-info/${this.props.match.params.id}`)
   }
 
   render() {
@@ -34,7 +34,7 @@ class HomePage extends Component {
       (
     <Paper className="petInfoPaper" elevation={5}>
       <Typography variant="h4" component="h3">
-        {this.props.petInfo.name} <Button onClick={ () => this.editPetInfo(this.props.petInfo.id)}>Edit Pet Info</Button>
+        {this.props.petInfo.name} <Button onClick={this.editPetInfo}>Edit Pet Info</Button>
       </Typography>
       <Typography component="p">
         Fed: 
