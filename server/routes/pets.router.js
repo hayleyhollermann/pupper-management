@@ -158,7 +158,7 @@ router.put('/petInfo', rejectUnauthenticated, (req, res) => {
     queryText=`UPDATE "pets"
         SET "weight" = $1, "age"= $2, "vet_name"=$3, "vet_phone"=$4
         WHERE "id"=$5;`
-    pool.query(queryText, [req.body.editInfo.weight, req.body.editInfo.age, req.body.editInfo.vet_name, req.body.editInfo.vet_phone, req.body.petId])
+    pool.query(queryText, [req.body.editInfo.weight, req.body.editInfo.age, req.body.editInfo.vetName, req.body.editInfo.vetPhone, req.body.petId])
         .then(() => res.sendStatus(200))
         .catch((err) => {
             console.log('error adding an event in PUT /pets/petInfo', err);

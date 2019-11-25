@@ -6,7 +6,7 @@ import { Button, Input } from '@material-ui/core';
 
 
 
-class EditPetWeight extends Component {
+class EditPetAge extends Component {
 
   state = {
     editInfo: {
@@ -18,14 +18,14 @@ class EditPetWeight extends Component {
     showInput: false,
   }
 
-  weightInput = (event) => {
+  ageInput = (event) => {
     this.setState({
       ...this.state,
       editInfo: {
-        age: this.props.petInfo.age,
+        weight: this.props.petInfo.weight,
         vetName: this.props.petInfo.vet_name,
         vetPhone: this.props.petInfo.vet_phone,
-        weight: event.target.value
+        age: event.target.value
       }
     })
   }
@@ -45,15 +45,15 @@ class EditPetWeight extends Component {
   render() {
     return (
       <>
-        <p>Weight:</p>
+        <p>Age:</p>
         {!this.state.showInput ? 
           <div>
-            {(this.props.petInfo.weight) ? <span>{this.props.petInfo.weight}lbs </span> 
+            {(this.props.petInfo.age) ? <span>{this.props.petInfo.age} years </span> 
             : '' 
             } <Button onClick={this.toggleEdit}>Edit</Button>
           </div>
         : <div>
-            <Input placeholder='weight' onChange={this.weightInput}/>
+            <Input placeholder='age' onChange={this.ageInput}/>
             <Button onClick={this.submitChange}>Save Changes</Button>
         </div>
         }
@@ -71,4 +71,4 @@ const mapStateToProps = state => ({
   petMeds: state.petsReducer.petMeds
 });
 
-export default connect(mapStateToProps)(withRouter(EditPetWeight));
+export default connect(mapStateToProps)(withRouter(EditPetAge));
