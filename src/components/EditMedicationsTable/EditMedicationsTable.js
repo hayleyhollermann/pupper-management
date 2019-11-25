@@ -2,20 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Button, Input } from '@material-ui/core';
-import EditMedicationsTable from '../components/EditMedicationsTable/EditMedicationsTable';
 // import swal from 'sweetalert';
 
 
 
-class EditPetInfo extends Component {
+class EditMedicationsTable extends Component {
 
   state = {
-    editInfo: {
-      weight: '',
-      age: '',
-      vetName: '',
-      vetPhone: '',
-    },
     medToAdd: {
       med_name: '',
       quantity: '',
@@ -51,37 +44,52 @@ class EditPetInfo extends Component {
     })
   }
 
-
-  sumbitPet = () => {
-    // this.props.dispatch({type: 'ADD_PET', payload: this.state.newPet});
-    // swal("Done!", `Added ${this.state.newPet.name} to your household!`, "success")
-    // .then(() => {
-    //   this.props.history.push('/home');
-    // });
-  }
-
   render() {
     return (
       <>
         <div>
-          <h1>General Info</h1>
-            <p>Weight:</p>
-            {(this.props.petInfo.weight) ? <span>{this.props.petInfo.weight}lbs <Button>Edit</Button></span> 
-              : ''
-            }
-            <p>Age:</p>
-            {(this.props.petInfo.age) ? <span>{this.props.petInfo.age} years <Button>Edit</Button></span> 
-              : ''
-            }
-            <p>Vet Info:</p>
-            {(this.props.petInfo.vetName && this.props.petInfo.vetPhone) ? 
-                <span>
-                    Vet Name: {this.props.petInfo.vetName} <Button>Edit</Button><br/>
-                    Vet Phone: {this.props.petInfo.vetPhone} <Button>Edit</Button>
-                </span> 
-              : <Button>Add Vet Info</Button>
-            }
-          <EditMedicationsTable/>
+          <p>Medications: </p>
+            <table> 
+              <thead>
+                <tr>
+                  <th>Med Name</th>
+                  <th>Amount</th>
+                  <th>Frequency</th>
+                  <th>Remove</th>
+                </tr>
+              </thead>
+              <tbody>
+                {(this.props.petMeds.length > 1 ? 
+                  this.props.petMeds.map((med) => 
+                    <tr key={med.med_id}>
+                      <td>{med.type}</td>
+                      <td>{med.quantity}</td>
+                      <td>{med.frequency}</td>
+                      <td><Button>Delete</Button></td>
+                    </tr>
+                  )
+                : 
+                  <tr>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                  </tr>
+                )}
+                <tr>
+                  <td><Input margin="dense" variant="outlined" placeholder="Med Name" fullWidth={true} value={this.state.medToAdd.med_name}
+                    onChange={ (event)=> this.medInput('med_name', event)}/> 
+                  </td>
+                  <td><Input margin="dense" variant="outlined" placeholder="Amount" fullWidth={true} value={this.state.medToAdd.quantity} 
+                    onChange={ (event)=> this.medInput('quantity', event)}/> 
+                  </td>
+                  <td><Input margin="dense" variant="outlined" placeholder="Frequency" fullWidth={true} value={this.state.medToAdd.frequency}
+                    onChange={ (event)=> this.medInput('frequency', event)}/> 
+                  </td>
+                  <td><Button onClick={this.addNewMed}>Add</Button></td>
+                </tr>
+              </tbody>
+            </table>
 {/*             
             <TextField margin="dense" variant="outlined" label="Weight (lbs)" fullWidth={true} value={this.state.editInfo.weight}
               onChange={ (event)=> this.editNewPet('weight', event)}
@@ -112,4 +120,4 @@ const mapStateToProps = state => ({
   petMeds: state.petsReducer.petMeds
 });
 
-export default connect(mapStateToProps)(withRouter(EditPetInfo));
+export default connect(mapStateToProps)(withRouter(EditMedicationsTable));
