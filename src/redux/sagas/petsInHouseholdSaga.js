@@ -34,16 +34,6 @@ function* getPetMeds (action) {
     console.log('error fetching info on this pet in getPetInfo', err);
   }
 }
-// adds a new pet to selected household
-function* addNewPet (action) {
-  console.log('in addNewPet Saga', action.payload);
-  try {
-    yield axios.post('/pets', action.payload)
-    yield put({type: 'GET_PETS'})
-  } catch(err) {
-    console.log('error adding pets to household', err);
-  }
-}
 // gets all recent events for all pets in a household
 function* allRecentEvents () {
   console.log('in /hh-events');
@@ -54,6 +44,26 @@ function* allRecentEvents () {
     console.log('error getting recent events for all pets in household', err);
   }
 }
+// adds a new pet to selected household
+function* addNewPet (action) {
+  console.log('in addNewPet Saga', action.payload);
+  try {
+    yield axios.post('/pets', action.payload)
+    yield put({type: 'GET_PETS'})
+  } catch(err) {
+    console.log('error adding pets to household', err);
+  }
+}
+// adds new medication for a pet
+function* addNewMed (action) {
+  console.log('in addNewMed Saga', action.payload);
+  try {
+    yield axios.post(`/pets/petInfo/meds`, action.payload)
+    yield put({type: 'FETCH_MEDS', payload: action.payload.petId})
+  } catch(err) {
+    console.log('error adding med for pet', err);
+  }
+}
 
 function* petsInHouseholdsSaga() {
   yield takeLatest('FETCH_PETS', getPets)
@@ -61,7 +71,7 @@ function* petsInHouseholdsSaga() {
   yield takeLatest('ADD_PET', addNewPet)
   yield takeLatest('FETCH_HH_EVENTS', allRecentEvents)
   yield takeLatest('FETCH_MEDS', getPetMeds)
-
+  yield takeLatest('ADD_MED', addNewMed)
 }
 
 export default petsInHouseholdsSaga;

@@ -113,6 +113,20 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         res.sendStatus(500);
     })
 })
+// ADD new med for pet
+router.post('/petInfo/meds', rejectUnauthenticated, (req, res) => {
+    console.log('in post /pets', req.body)
+    queryText = `INSERT INTO "medications" ("pets_id", "type", "quantity", "frequency")
+        VALUES ($1, $2, $3, $4);`
+    pool.query(queryText, [req.body.petId, req.body.medToAdd.med_name, req.body.medToAdd.quantity, req.body.medToAdd.frequency])
+    .then(() => {
+        res.sendStatus(200);
+    })
+    .catch((err) => {
+        console.log('error adding a pet in POST /pets/petInfo/meds', err);
+        res.sendStatus(500);
+    })
+})
 // ADD a new event for a pet 
 router.post('/events/:id', rejectUnauthenticated, (req, res) => {
     console.log('in post /pets/events', req.params.id, req.body);
