@@ -20,7 +20,18 @@ const petInfo = (state={}, action) => {
     }
 }
 
+const petMeds = (state=[], action) => {
+    switch (action.type) {
+        case 'SET_MEDS':
+            console.log('in pet Meds reducer', action.payload);
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
   pets,
   petInfo,
+  petMeds,
 });

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import Moment from 'react-moment';
 import 'moment-timezone';
+import Medications from '../Medications/Medications'
 import {Button, Paper, Typography} from '@material-ui/core';
 
 
@@ -13,6 +14,7 @@ class HomePage extends Component {
     console.log('petId =');
     this.props.dispatch({type: 'FETCH_EVENTS', payload: petId})
     this.props.dispatch({type: 'FETCH_PET', payload: petId})
+    this.props.dispatch({type: 'FETCH_MEDS', payload: petId})
   }
 
   addNewEvent = (eventToUpdate) => {
@@ -21,10 +23,8 @@ class HomePage extends Component {
     this.props.dispatch({type: 'ADD_EVENT', payload: {petId: this.props.petInfo.id, event_type: eventToUpdate, time: timeOfEvent}})
   }
 
-  addNewMedEvent = (medToUpdate) => {
-    let timeOfEvent = moment().format()
-    console.log(medToUpdate, timeOfEvent)
-    this.props.dispatch({type: 'ADD_MED_EVENT', payload: {petId: this.props.petInfo.id, med_type: medToUpdate, time: timeOfEvent}})
+  editPetInfo = () => {
+
   }
 
   render() {
@@ -34,7 +34,7 @@ class HomePage extends Component {
       (
     <Paper className="petInfoPaper" elevation={5}>
       <Typography variant="h4" component="h3">
-        {this.props.petInfo.name}
+        {this.props.petInfo.name} <Button onClick={ () => this.editPetInfo(this.props.petInfo.id)}>Edit Pet Info</Button>
       </Typography>
       <Typography component="p">
         Fed: 
@@ -49,6 +49,8 @@ class HomePage extends Component {
             </Button>
             <Button>See All</Button>
             <br />
+      </Typography>
+      <Typography component="p">
         Walked: 
             {(this.props.events.length > 0) && 
                 (this.props.events.filter(recentEvents => recentEvents.event_type === 'walked').length > 0) ?  
@@ -61,6 +63,8 @@ class HomePage extends Component {
             </Button>
             <Button>See All</Button>
             <br />
+      </Typography>
+      <Typography component="p">
         Last Outside: 
             {(this.props.events.length > 0) && 
                 (this.props.events.filter(recentEvents => recentEvents.event_type === 'last outside').length > 0) ? 
@@ -73,20 +77,8 @@ class HomePage extends Component {
             </Button>
             <Button>See All</Button>
             <br />
-        Medications: 
-
-            {(this.props.events.length > 0) && 
-                (this.props.events.filter(recentEvents => recentEvents.event_type === 'medication').length > 0) ? 
-                  this.props.events.filter(recentEvents => recentEvents.event_type === 'medication').map((med) => 
-                    <li key={med.med_id}>{med.type}: <Moment format='LLLL'>{med.time}</Moment>
-                      <Button onClick={ () => this.addNewMedEvent(med.med_id)} >
-                        Update!
-                      </Button>
-                      <Button>See All</Button>
-                    </li>
-                  )
-            : 'N/A'  } 
       </Typography>
+      <Medications />
       <Typography component="p">
         Breed: {this.props.petInfo.breed} <br />
         Weight: {this.props.petInfo.weight} <br />
@@ -104,7 +96,8 @@ class HomePage extends Component {
       (<h1>this is not your pet!</h1>)
       }
       {/* <pre>{JSON.stringify(this.props.petInfo)}</pre> */}
-      <pre>{JSON.stringify(this.props.events.filter(recentEvents => recentEvents.event_type === 'medication'), null, 2)}</pre>
+      {/* <pre>{JSON.stringify(this.props.petMeds, null, 2)}</pre>
+      <pre>{JSON.stringify(this.props.events.filter(recentEvents => recentEvents.event_type === 'medication'), null, 2)}</pre> */}
       </div>
     )
   }
@@ -114,7 +107,8 @@ const mapStateToProps = state => ({
   user: state.user,
   pets: state.petsReducer.pets,
   events: state.petEventsReducer.petEvents,
-  petInfo: state.petsReducer.petInfo
+  petInfo: state.petsReducer.petInfo,
+  petMeds: state.petsReducer.petMeds
 });
 
 export default connect(mapStateToProps)(HomePage);

@@ -35,14 +35,29 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 router.get('/petInfo/:id', rejectUnauthenticated, (req, res) => {
     console.log('in get /pets/petInfo', req.params.id);
     queryText = `SELECT "pets".*, "households_users"."users_id" FROM "pets"
-    JOIN "households_users" ON "households_users"."households_id" = "pets"."households_id"
-    WHERE "pets"."id" = $1 AND "households_users"."users_id" = $2;`
+        JOIN "households_users" ON "households_users"."households_id" = "pets"."households_id"
+        WHERE "pets"."id" = $1 AND "households_users"."users_id" = $2;`
     pool.query(queryText, [req.params.id, req.user.id])
         .then((results) => {
             res.send(results.rows[0])
         })
         .catch((err) => {
             console.log('error in get /pets/petInfo', err);
+            res.sendStatus(500)
+        })
+})
+// GET all medications for a dog
+router.get('/petInfo/meds/:id', rejectUnauthenticated, (req, res) => {
+    console.log('in get /pets/petInfo/medications', req.params.id);
+    queryText = `SELECT "pets"."id", "medications"."id" AS "med_id", "medications"."quantity", "medications"."frequency", "medications"."type" FROM "pets"
+        JOIN "medications" ON "pets"."id" = "medications"."pets_id"
+        WHERE "pets"."id"=$1;`
+    pool.query(queryText, [req.params.id])
+        .then((results) => {
+            res.send(results.rows)
+        })
+        .catch((err) => {
+            console.log('error in get /pets/petInfo/meds', err);
             res.sendStatus(500)
         })
 })
@@ -112,7 +127,7 @@ router.post('/events/:id', rejectUnauthenticated, (req, res) => {
         res.sendStatus(500)
     })
 })
-
+// ADDS a new med event for a pet
 router.post('/events/meds/:id', rejectUnauthenticated, (req, res) => {
     console.log('in post /pets/events', req.params.id, req.body);
     queryText = `INSERT INTO "pets_events" ("pets_id", "time", "events_id", "medications_id")

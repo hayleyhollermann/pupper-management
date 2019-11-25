@@ -23,6 +23,17 @@ function* getPetInfo (action) {
     console.log('error fetching info on this pet in getPetInfo', err);
   }
 }
+// gets all medications for a pet
+function* getPetMeds (action) {
+  console.log('in getPetMeds', action.payload);
+  try {
+    const petInfoResponse = yield axios.get(`/pets/petInfo/meds/${action.payload}`);
+    console.log('response in getPetInfo', petInfoResponse.data);
+    yield put({type: 'SET_MEDS', payload: petInfoResponse.data})
+  } catch(err) {
+    console.log('error fetching info on this pet in getPetInfo', err);
+  }
+}
 // adds a new pet to selected household
 function* addNewPet (action) {
   console.log('in addNewPet Saga', action.payload);
@@ -49,6 +60,8 @@ function* petsInHouseholdsSaga() {
   yield takeLatest('FETCH_PET', getPetInfo)
   yield takeLatest('ADD_PET', addNewPet)
   yield takeLatest('FETCH_HH_EVENTS', allRecentEvents)
+  yield takeLatest('FETCH_MEDS', getPetMeds)
+
 }
 
 export default petsInHouseholdsSaga;

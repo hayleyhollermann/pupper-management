@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {Fab, Typography, Paper, TextField} from '@material-ui/core';
+import {Paper, TextField} from '@material-ui/core';
 
 
 class LoginPage extends Component {

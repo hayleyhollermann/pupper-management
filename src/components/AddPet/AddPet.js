@@ -16,10 +16,7 @@ class AddPet extends Component {
           weight: '',
           age: '',
           vetName: '',
-          vetPhone: '',
-          medName: '',
-          medAmount: '',
-          medFreq: ''
+          vetPhone: ''
       },
       showPt2: false
   }
@@ -41,7 +38,7 @@ class AddPet extends Component {
     })
   }
 
-  SumbitPet = () => {
+  sumbitPet = () => {
     this.props.dispatch({type: 'ADD_PET', payload: this.state.newPet});
     swal("Done!", `Added ${this.state.newPet.name} to your household!`, "success")
     .then(() => {
@@ -78,7 +75,7 @@ class AddPet extends Component {
              <TextField margin="dense" variant="outlined" label="Vet Phone" fullWidth={true} value={this.state.newPet.vetPhone}
                 onChange={ (event)=> this.editNewPet('vetPhone', event)}
               />  
-             <h1>Medications</h1>
+             {/* <h1>Medications</h1>
              <TextField margin="dense" variant="outlined" label="Medication Name" fullWidth={true} value={this.state.newPet.medName}
                 onChange={ (event)=> this.editNewPet('medName', event)}
               />  
@@ -87,8 +84,9 @@ class AddPet extends Component {
               />  
              <TextField margin="dense" variant="outlined" label="Frequency" fullWidth={true} value={this.state.newPet.medFreq}
                 onChange={ (event)=> this.editNewPet('medFreq', event)}
-              /> 
-             <Button onClick={this.SumbitPet}>Submit</Button>
+              /> */}
+             <Button onClick={this.sumbitPet}>Submit</Button>
+             <pre>{JSON.stringify(this.state, null, 2)}</pre>
           </div>
         }
       </>
