@@ -16,12 +16,6 @@ class EditMedicationsTable extends Component {
     }
   }
 
-  componentDidMount () {
-    let petId = this.props.match.params.id;
-    this.props.dispatch({type: 'FETCH_PET', payload: petId})
-    this.props.dispatch({type: 'FETCH_MEDS', payload: petId})
-  }
-
   medInput = (property, event) => {
     this.setState({
       ...this.state,
@@ -90,23 +84,7 @@ class EditMedicationsTable extends Component {
                 </tr>
               </tbody>
             </table>
-{/*             
-            <TextField margin="dense" variant="outlined" label="Weight (lbs)" fullWidth={true} value={this.state.editInfo.weight}
-              onChange={ (event)=> this.editNewPet('weight', event)}
-            />  
-            <TextField margin="dense" variant="outlined" label="Age (years)" fullWidth={true} value={this.state.editInfo.age}
-              onChange={ (event)=> this.editNewPet('age', event)}
-            /> 
-            <h1>Vet Info</h1>
-            <TextField margin="dense" variant="outlined" label="Vet Name" fullWidth={true} value={this.state.editInfo.vetName}
-              onChange={ (event)=> this.editNewPet('vetName', event)}
-            />  
-            <TextField margin="dense" variant="outlined" label="Vet Phone" fullWidth={true} value={this.state.editInfo.vetPhone}
-              onChange={ (event)=> this.editNewPet('vetPhone', event)}
-            />  */}
-            {/* <Button onClick={this.sumbitPet}>Submit Changes</Button> */}
             <pre>{JSON.stringify(this.state, null, 2)}</pre>
-            <pre>{JSON.stringify(this.props.petInfo, null, 2)}</pre>
           </div>
       </>
     )

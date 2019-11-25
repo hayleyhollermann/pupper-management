@@ -24,7 +24,7 @@ import Settings from '../Settings/Settings';
 import AddUserToHousehold from '../AddUserToHousehold/AddUserToHousehold';
 import ChangeHousehold from '../ChangeHousehold/ChangeHousehold';
 import CreateHousehold from '../CreateHousehold/CreateHousehold';
-import EditPetInfo from '../../EditPetInfo/EditPetInfo';
+import EditPetInfo from '../EditPetInfo/EditPetInfo';
 
 class App extends Component {
   componentDidMount () {

@@ -64,6 +64,17 @@ function* addNewMed (action) {
     console.log('error adding med for pet', err);
   }
 }
+// Upodates info for a pet
+function* editPetInfo (action) {
+  console.log('in editPetInfo Saga', action.payload);
+  try {
+    yield axios.put(`/pets/petInfo`, action.payload)
+    yield put({type: 'FETCH_PET', payload: action.payload.petId})
+  } catch(err) {
+    console.log('error editing pet info', err);
+  }
+}
+
 
 function* petsInHouseholdsSaga() {
   yield takeLatest('FETCH_PETS', getPets)
@@ -72,6 +83,8 @@ function* petsInHouseholdsSaga() {
   yield takeLatest('FETCH_HH_EVENTS', allRecentEvents)
   yield takeLatest('FETCH_MEDS', getPetMeds)
   yield takeLatest('ADD_MED', addNewMed)
+  yield takeLatest('EDIT_INFO', editPetInfo)
+
 }
 
 export default petsInHouseholdsSaga;

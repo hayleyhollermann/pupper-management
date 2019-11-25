@@ -105,13 +105,13 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     queryText = `INSERT INTO "pets" ("name", "households_id", "breed", "weight", "age", "vet_name", "vet_phone")
         VALUES ($1, $2, $3, $4, $5, $6, $7);`
     pool.query(queryText, [req.body.name, req.body.householdId, req.body.breed, req.body.weight, req.body.age, req.body.vetName, req.body.vetPhone])
-    .then(() => {
-        res.sendStatus(200);
-    })
-    .catch((err) => {
-        console.log('error adding a pet in POST /pets', err);
-        res.sendStatus(500);
-    })
+        .then(() => {
+            res.sendStatus(200);
+        })
+        .catch((err) => {
+            console.log('error adding a pet in POST /pets', err);
+            res.sendStatus(500);
+        })
 })
 // ADD new med for pet
 router.post('/petInfo/meds', rejectUnauthenticated, (req, res) => {
@@ -119,41 +119,51 @@ router.post('/petInfo/meds', rejectUnauthenticated, (req, res) => {
     queryText = `INSERT INTO "medications" ("pets_id", "type", "quantity", "frequency")
         VALUES ($1, $2, $3, $4);`
     pool.query(queryText, [req.body.petId, req.body.medToAdd.med_name, req.body.medToAdd.quantity, req.body.medToAdd.frequency])
-    .then(() => {
-        res.sendStatus(200);
-    })
-    .catch((err) => {
-        console.log('error adding a pet in POST /pets/petInfo/meds', err);
-        res.sendStatus(500);
-    })
+        .then(() => {
+            res.sendStatus(200);
+        })
+        .catch((err) => {
+            console.log('error adding a pet in POST /pets/petInfo/meds', err);
+            res.sendStatus(500);
+        })
 })
 // ADD a new event for a pet 
 router.post('/events/:id', rejectUnauthenticated, (req, res) => {
     console.log('in post /pets/events', req.params.id, req.body);
     queryText = `INSERT INTO "pets_events" ("pets_id", "time", "events_id")
-    VALUES ($1, $2, (SELECT "id" FROM "events" WHERE "type" = $3));`
+        VALUES ($1, $2, (SELECT "id" FROM "events" WHERE "type" = $3));`
     pool.query(queryText, [req.params.id, req.body.time, req.body.event_type])
-    .then(() => {
-        res.sendStatus(200);
-    })
-    .catch((err) => {
-        console.log('error adding an event in POST /pets/events', err);
-        res.sendStatus(500)
-    })
+        .then(() => {
+            res.sendStatus(200);
+        })
+        .catch((err) => {
+            console.log('error adding an event in POST /pets/events', err);
+            res.sendStatus(500)
+        })
 })
 // ADDS a new med event for a pet
 router.post('/events/meds/:id', rejectUnauthenticated, (req, res) => {
     console.log('in post /pets/events', req.params.id, req.body);
     queryText = `INSERT INTO "pets_events" ("pets_id", "time", "events_id", "medications_id")
-    VALUES ($1, $2, $3, $4);`
+        VALUES ($1, $2, $3, $4);`
     pool.query(queryText, [req.params.id, req.body.time, '4', req.body.med_type])
-    .then(() => {
-        res.sendStatus(200);
-    })
-    .catch((err) => {
-        console.log('error adding an event in POST /pets/events/meds', err);
-        res.sendStatus(500)
-    })
+        .then(() => res.sendStatus(200))
+        .catch((err) => {
+            console.log('error adding an event in POST /pets/events/meds', err);
+            res.sendStatus(500)
+        })
+})
+// UPDATE
+router.put('/petInfo', rejectUnauthenticated, (req, res) => {
+    queryText=`UPDATE "pets"
+        SET "weight" = $1, "age"= $2, "vet_name"=$3, "vet_phone"=$4
+        WHERE "id"=$5;`
+    pool.query(queryText, [req.body.editInfo.weight, req.body.editInfo.age, req.body.editInfo.vet_name, req.body.editInfo.vet_phone, req.body.petId])
+        .then(() => res.sendStatus(200))
+        .catch((err) => {
+            console.log('error adding an event in PUT /pets/petInfo', err);
+            res.sendStatus(500)
+        })
 })
 
 
