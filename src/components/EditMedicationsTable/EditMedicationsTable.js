@@ -42,7 +42,7 @@ class EditMedicationsTable extends Component {
     return (
       <>
         <div>
-          <p>Medications: </p>
+          <h3>Medications: </h3>
             <table> 
               <thead>
                 <tr>
@@ -84,7 +84,6 @@ class EditMedicationsTable extends Component {
                 </tr>
               </tbody>
             </table>
-            <pre>{JSON.stringify(this.state, null, 2)}</pre>
           </div>
       </>
     )

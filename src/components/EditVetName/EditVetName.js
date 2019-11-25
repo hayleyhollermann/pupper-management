@@ -6,7 +6,7 @@ import { Button, Input } from '@material-ui/core';
 
 
 
-class EditPetAge extends Component {
+class EditVetName extends Component {
 
   state = {
     editInfo: {
@@ -18,14 +18,14 @@ class EditPetAge extends Component {
     showInput: false,
   }
 
-  ageInput = (event) => {
+  vetNameInput = (event) => {
     this.setState({
       ...this.state,
       editInfo: {
+        age: this.props.petInfo.age,
         weight: this.props.petInfo.weight,
-        vetName: this.props.petInfo.vet_name,
         vetPhone: this.props.petInfo.vet_phone,
-        age: event.target.value
+        vetName: event.target.value
       }
     })
   }
@@ -45,15 +45,15 @@ class EditPetAge extends Component {
   render() {
     return (
       <>
-        <p>Age:</p>
+        <p>Vet Name:</p>
         {!this.state.showInput ? 
           <div>
-            {(this.props.petInfo.age) ? <span>{this.props.petInfo.age} years </span> 
+            {(this.props.petInfo.vet_name) ? <span>{this.props.petInfo.vet_name}</span> 
             : '' 
             } <Button onClick={this.toggleEdit}>Edit</Button>
           </div>
         : <div>
-            <Input placeholder='age' onChange={this.ageInput}/>
+            <Input placeholder='vet name' onChange={this.vetNameInput}/>
             <Button onClick={this.submitChange}>Save Changes</Button>
         </div>
         }
@@ -69,4 +69,4 @@ const mapStateToProps = state => ({
   petMeds: state.petsReducer.petMeds
 });
 
-export default connect(mapStateToProps)(withRouter(EditPetAge));
+export default connect(mapStateToProps)(withRouter(EditVetName));

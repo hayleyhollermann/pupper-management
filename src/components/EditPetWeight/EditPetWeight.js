@@ -57,8 +57,6 @@ class EditPetWeight extends Component {
             <Button onClick={this.submitChange}>Save Changes</Button>
         </div>
         }
-        <pre>{JSON.stringify(this.state,null, 0)}</pre>
-        <pre>{JSON.stringify(this.props.petInfo,null, 0)}</pre>
       </>
     )
   }
