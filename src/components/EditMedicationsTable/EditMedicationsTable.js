@@ -53,7 +53,7 @@ class EditMedicationsTable extends Component {
                 </tr>
               </thead>
               <tbody>
-                {(this.props.petMeds.length > 1 ? 
+                {(this.props.petMeds.length > 0 ? 
                   this.props.petMeds.map((med) => 
                     <tr key={med.med_id}>
                       <td>{med.type}</td>

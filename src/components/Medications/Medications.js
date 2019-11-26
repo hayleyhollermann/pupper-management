@@ -18,8 +18,8 @@ class Medications extends Component {
   render() {
     return (
       <>
-      <Typography component="div">
-        Medications: 
+        <Typography component="div">
+          Medications: 
             {(this.props.petMeds.length > 1 ? 
               this.props.petMeds.map((med) => 
                 <li key={med.med_id}>{med.type}
@@ -38,21 +38,7 @@ class Medications extends Component {
               )
             : 'N/A'
             )}
-             {/* {(this.props.events.length > 0) && 
-                (this.props.events.filter(recentEvents => recentEvents.event_type === 'medication').length > 0) ? 
-                  this.props.events.filter(recentEvents => recentEvents.event_type === 'medication').map((med) => 
-                    <li key={med.med_id}>{med.type}: <Moment format='LLLL'>{med.time}</Moment>
-                      <Button onClick={ () => this.addNewMedEvent(med.med_id)} >
-                        Update!
-                      </Button>
-                      <Button>See All</Button>
-                    </li>
-                  )
-            : 'N/A'  } */}
-      </Typography>
-      {/* <pre>{JSON.stringify(this.props.petInfo)}</pre> */}
-      <pre>{JSON.stringify(this.props.petMeds, null, 2)}</pre>
-      <pre>{JSON.stringify(this.props.events.filter(recentEvents => recentEvents.event_type === 'medication'), null, 2)}</pre>
+        </Typography>
       </>
     )
   }
