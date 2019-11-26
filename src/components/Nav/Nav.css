@@ -30,10 +30,6 @@ button.nav-link {
   cursor: pointer;
   outline:0;
 }
-/* 
-.nav-link:hover {
-  background-color: #008183;
-} */
 
 .nav-right {
   float: right;

@@ -4,6 +4,7 @@ import PetCard from '../PetCard/PetCard';
 import {Fab} from '@material-ui/core';
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
 import { withRouter } from 'react-router-dom';
+// import { thisExpression } from '@babel/types';
 
 
 
@@ -36,9 +37,13 @@ class HomePage extends Component {
               events = {this.props.householdEvents && this.props.householdEvents.length > 1 ? this.props.householdEvents.filter(recentEvents => recentEvents.id === pet.id)
               : [] } />
             )} <br />
-          <Fab variant="extended" size='large' onClick={this.addAPetForm}>
-            <AddRoundedIcon /> Add a Pet
-          </Fab>
+          {this.props.pets && this.props.pets.length>0 && this.props.pets[0].is_admin ? 
+            <Fab variant="extended" size='large' onClick={this.addAPetForm}>
+              <AddRoundedIcon /> Add a Pet
+            </Fab>
+            :
+            ''
+          }
         </div>
         : 
         <div>
@@ -48,6 +53,7 @@ class HomePage extends Component {
           </Fab>
         </div>
         }
+        {/* <pre>{JSON.stringify(this.props.pets[0].is_admin)}</pre> */}
       </div>
     )
   }

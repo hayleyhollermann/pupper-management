@@ -3,33 +3,42 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
+// function checkIfAdmin(userId, selectedHousehold) {
+//     queryText=`SELECT "households"."id", "households"."name", "households_users"."users_id", "user"."username", "households_users"."is_admin", "user"."selected_household_id" FROM "households"
+//         JOIN "households_users" ON "households_users"."households_id"="households"."id"
+//         JOIN "user" ON "user"."id"="households_users"."users_id"
+//         WHERE "user"."id"=$1 AND "households"."id"=$2;`
+//     pool.query(queryText, [userId, selectedHousehold])
+//         .then((results) => {
+//             res.send(results.rows.is_admin)
+//         })
+//         .catch((err) => {
+//             console.log('error in checkIfAdmin', err);
+//             res.sendStatus(500)
+//         })
+// }
 
 //--------GETS---------
 // GET all pets in a household
 router.get('/', rejectUnauthenticated, (req, res) => {
     console.log('in get /pets', req.user);
-    // select current household ID of user
-    const queryText = `SELECT "selected_household_id" FROM "user"
-        WHERE "id"=$1;`;
-    pool.query(queryText, [req.user.id])
+    // gets all pets in current household
+    // const queryText = `SELECT "pets"."name" AS "pet_name", "pets"."id", "pets"."households_id", "households"."name", "pets"."breed", "pets"."vet_name", "pets"."vet_phone", "pets"."age", "pets"."weight" FROM "pets" 
+    //     JOIN "households" ON "pets"."households_id"="households"."id"
+    //     WHERE "households"."id"=$1 ORDER BY "pets"."id";`;
+    queryText = `SELECT "pets"."name" AS "pet_name", "pets"."id", "pets"."households_id", "households"."name", "pets"."breed", "pets"."vet_name", "pets"."vet_phone", "pets"."age", "pets"."weight", "households_users"."is_admin" FROM "pets" 
+        JOIN "households" ON "pets"."households_id"="households"."id"
+        JOIN "households_users" ON "households"."id" = "households_users"."households_id"
+        WHERE "households"."id"=$1 AND "households_users"."users_id" = $2
+        ORDER BY "pets"."id";`;
+    pool.query(queryText, [req.user.selected_household_id, req.user.id])
         .then((results) => {
-            // gets all pets in current household
-            const queryText2 = `SELECT "pets"."name" AS "pet_name", "pets"."id", "pets"."households_id", "households"."name", "pets"."breed", "pets"."vet_name", "pets"."vet_phone", "pets"."age", "pets"."weight" FROM "pets" 
-            JOIN "households" ON "pets"."households_id"="households"."id"
-            WHERE "households"."id"=$1 ORDER BY "pets"."id";`;
-            pool.query(queryText2, [results.rows[0].selected_household_id])
-            .then((results) => {
-                res.send(results.rows)
-            })
-            .catch((err) => {
-                console.log('error in select pets in a household', err);
-                res.sendStatus(500)
-            })
+            res.send(results.rows)
         })
-        .catch(error => {
-            console.log('Error making SELECT for /user-households:', error);
-            res.sendStatus(500);
-        });
+        .catch((err) => {
+            console.log('error in select pets in a household', err);
+            res.sendStatus(500)
+        })
 });
 // GET all info on a given pet
 router.get('/petInfo/:id', rejectUnauthenticated, (req, res) => {
