@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import Moment from 'react-moment';
 import 'moment-timezone';
-import {Button, Typography, Fab} from '@material-ui/core';
-import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 
 
 
@@ -21,27 +18,36 @@ class Medications extends Component {
   render() {
     return (
       <>
-        <Typography component="div">
-          Medications: 
-            {(this.props.petMeds.length > 1 ? 
-              this.props.petMeds.map((med) => 
-                <li key={med.med_id}>{med.type}
-                    <Button onClick={ () => this.addNewMedEvent(med.med_id)} >
-                      Give Med!
-                    </Button> <br />
-                  {(this.props.events.length > 0) && 
-                    (this.props.events.filter(recentEvents => recentEvents.event_type === 'medication').length > 0) ? 
-                        this.props.events.filter(recentEvents => recentEvents.med_id === med.med_id).map((med) => 
-                           <div key={med.med_id}><Moment format='LLLL'>{med.time}</Moment>
-                            <Fab size="small"><FormatListBulletedIcon /></Fab>
-                    </div>
+        <div>
+          <h3>Medications: </h3>
+            <table> 
+              <thead>
+                <tr>
+                  <th>Med Name</th>
+                  <th>Amount</th>
+                  <th>Frequency</th>
+                </tr>
+              </thead>
+              <tbody>
+                {(this.props.petMeds.length > 0 ? 
+                  this.props.petMeds.map((med) => 
+                    <tr key={med.med_id}>
+                      <td>{med.type}</td>
+                      <td>{med.quantity}</td>
+                      <td>{med.frequency}</td>
+                    </tr>
                   )
-                : 'N/A' }
-                </li>
-              )
-            : 'N/A'
-            )}
-        </Typography>
+                : 
+                  <tr>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+        </div>
       </>
     )
   }

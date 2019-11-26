@@ -84,7 +84,6 @@ class HomePage extends Component {
             <Fab size="small"><FormatListBulletedIcon /></Fab>
             <br />
       </Typography>
-      <Medications />
       <Typography component="p">
         Breed: {this.props.petInfo.breed} <br />
         Weight: {this.props.petInfo.weight} <br />
@@ -98,6 +97,7 @@ class HomePage extends Component {
             : 'No vet phone on file'        
         } <br />
       </Typography>
+      <Medications />
     </Paper>) :
       (<h1>this is not your pet!</h1>)
       }

@@ -38,6 +38,10 @@ class EditMedicationsTable extends Component {
     })
   }
 
+  deleteMed = (id) => {
+    console.log('in delete med', id);
+  }
+
   render() {
     return (
       <>
@@ -59,7 +63,7 @@ class EditMedicationsTable extends Component {
                       <td>{med.type}</td>
                       <td>{med.quantity}</td>
                       <td>{med.frequency}</td>
-                      <td><Button>Delete</Button></td>
+                      <td><Button onClick={ () => this.deleteMed(med.id)}>Delete</Button></td>
                     </tr>
                   )
                 : 
