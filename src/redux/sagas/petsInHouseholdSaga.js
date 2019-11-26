@@ -75,6 +75,16 @@ function* editPetInfo (action) {
   }
 }
 
+function* deletePetMed (action) {
+  console.log('in editPetInfo Saga', action.payload);
+  try {
+    yield axios.delete(`/pets/petInfo/meds/${action.payload.medId}`)
+    yield put({type: 'FETCH_MEDS', payload: action.payload.petId})
+  } catch(err) {
+    console.log('error editing pet info', err);
+  }
+}
+
 
 function* petsInHouseholdsSaga() {
   yield takeLatest('FETCH_PETS', getPets)
@@ -84,7 +94,7 @@ function* petsInHouseholdsSaga() {
   yield takeLatest('FETCH_MEDS', getPetMeds)
   yield takeLatest('ADD_MED', addNewMed)
   yield takeLatest('EDIT_INFO', editPetInfo)
-
+  yield takeLatest('DELETE_MED', deletePetMed)
 }
 
 export default petsInHouseholdsSaga;

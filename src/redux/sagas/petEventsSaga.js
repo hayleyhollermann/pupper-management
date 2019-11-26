@@ -22,20 +22,20 @@ function* addPetEvent (action) {
   }
 }
 
-function* addMedEvent (action) {
-  console.log('in addMedEvent', action.payload);
-  try {
-    yield axios.post(`/pets/events/meds/${action.payload.petId}`, action.payload)
-    // yield put({type: 'FETCH_EVENTS', payload: action.payload.petId})
-  } catch (err) {
-    console.log('error adding event in addPetEvent Saga', err);
-  }
-}
+// function* addMedEvent (action) {
+//   console.log('in addMedEvent', action.payload);
+//   try {
+//     yield axios.post(`/pets/events/meds/${action.payload.petId}`, action.payload)
+//     // yield put({type: 'FETCH_EVENTS', payload: action.payload.petId})
+//   } catch (err) {
+//     console.log('error adding event in addPetEvent Saga', err);
+//   }
+// }
 
 function* petEventsSaga() {
   yield takeEvery('FETCH_EVENTS', getPetEvents)
   yield takeEvery('ADD_EVENT', addPetEvent)
-  yield takeEvery('ADD_MED_EVENT', addMedEvent)
+  // yield takeEvery('ADD_MED_EVENT', addMedEvent)
 
 }
 

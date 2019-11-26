@@ -40,6 +40,7 @@ class EditMedicationsTable extends Component {
 
   deleteMed = (id) => {
     console.log('in delete med', id);
+    this.props.dispatch({type: 'DELETE_MED', payload: {medId: id, petId: this.props.petInfo.id}})
   }
 
   render() {
@@ -53,7 +54,7 @@ class EditMedicationsTable extends Component {
                   <th>Med Name</th>
                   <th>Amount</th>
                   <th>Frequency</th>
-                  <th>Remove</th>
+                  <th> </th>
                 </tr>
               </thead>
               <tbody>
@@ -63,7 +64,7 @@ class EditMedicationsTable extends Component {
                       <td>{med.type}</td>
                       <td>{med.quantity}</td>
                       <td>{med.frequency}</td>
-                      <td><Button onClick={ () => this.deleteMed(med.id)}>Delete</Button></td>
+                      <td><Button onClick={ () => this.deleteMed(med.med_id)}>Delete</Button></td>
                     </tr>
                   )
                 : 
