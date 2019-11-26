@@ -4,7 +4,8 @@ import moment from 'moment';
 import Moment from 'react-moment';
 import 'moment-timezone';
 import Medications from '../Medications/Medications'
-import {Button, Paper, Typography} from '@material-ui/core';
+import {Button, Paper, Typography, Fab} from '@material-ui/core';
+import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 
 
 class HomePage extends Component {
@@ -47,7 +48,7 @@ class HomePage extends Component {
             <Button onClick={ () => this.addNewEvent('fed')} >
                 Update!
             </Button>
-            <Button>See All</Button>
+            <Fab size="small"><FormatListBulletedIcon /></Fab>
             <br />
       </Typography>
       <Typography component="p">
@@ -61,7 +62,7 @@ class HomePage extends Component {
             <Button onClick={ () => this.addNewEvent('walked')} >
                 Update!
             </Button>
-            <Button>See All</Button>
+            <Fab size="small"><FormatListBulletedIcon /></Fab>
             <br />
       </Typography>
       <Typography component="p">
@@ -75,7 +76,7 @@ class HomePage extends Component {
             <Button onClick={ () => this.addNewEvent('last outside')} >
                 Update!
             </Button>
-            <Button>See All</Button>
+            <Fab size="small"><FormatListBulletedIcon /></Fab>
             <br />
       </Typography>
       <Medications />

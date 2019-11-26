@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Button, Input } from '@material-ui/core';
+import { Input, Fab } from '@material-ui/core';
+import EditIcon from '@material-ui/icons/Edit';
+import DoneIcon from '@material-ui/icons/Done';
+
+
 // import swal from 'sweetalert';
 
 
@@ -50,11 +54,11 @@ class EditVetPhone extends Component {
           <div>
             {(this.props.petInfo.vet_phone) ? <span>{this.props.petInfo.vet_phone}</span> 
             : '' 
-            } <Button onClick={this.toggleEdit}>Edit</Button>
+            } <Fab size="small" onClick={this.toggleEdit}><EditIcon/></Fab>
           </div>
         : <div>
             <Input placeholder='vet name' onChange={this.vetPhoneInput}/>
-            <Button onClick={this.submitChange}>Save Changes</Button>
+            <Fab size="small" onClick={this.submitChange}><DoneIcon/></Fab>
         </div>
         }
       </>

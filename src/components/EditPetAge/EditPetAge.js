@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Button, Input } from '@material-ui/core';
+import { Input, Fab } from '@material-ui/core';
+import DoneIcon from '@material-ui/icons/Done';
+
+
+import EditIcon from '@material-ui/icons/Edit';
+
 // import swal from 'sweetalert';
 
 
@@ -50,11 +55,11 @@ class EditPetAge extends Component {
           <div>
             {(this.props.petInfo.age) ? <span>{this.props.petInfo.age} years </span> 
             : '' 
-            } <Button onClick={this.toggleEdit}>Edit</Button>
+            } <Fab size="small" onClick={this.toggleEdit}><EditIcon/></Fab>
           </div>
         : <div>
             <Input placeholder='age' onChange={this.ageInput}/>
-            <Button onClick={this.submitChange}>Save Changes</Button>
+            <Fab size="small" onClick={this.submitChange}><DoneIcon/></Fab>
         </div>
         }
       </>

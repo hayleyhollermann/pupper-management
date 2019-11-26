@@ -3,7 +3,10 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import Moment from 'react-moment';
 import 'moment-timezone';
-import {Button, Typography} from '@material-ui/core';
+import {Button, Typography, Fab} from '@material-ui/core';
+import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
+
+
 
 
 class Medications extends Component {
@@ -30,7 +33,7 @@ class Medications extends Component {
                     (this.props.events.filter(recentEvents => recentEvents.event_type === 'medication').length > 0) ? 
                         this.props.events.filter(recentEvents => recentEvents.med_id === med.med_id).map((med) => 
                            <div key={med.med_id}><Moment format='LLLL'>{med.time}</Moment>
-                          <Button>See All</Button>
+                            <Fab size="small"><FormatListBulletedIcon /></Fab>
                     </div>
                   )
                 : 'N/A' }
