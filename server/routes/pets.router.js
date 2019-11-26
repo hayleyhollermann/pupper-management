@@ -43,7 +43,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 // GET all info on a given pet
 router.get('/petInfo/:id', rejectUnauthenticated, (req, res) => {
     console.log('in get /pets/petInfo', req.params.id);
-    queryText = `SELECT "pets".*, "households_users"."users_id" FROM "pets"
+    queryText = `SELECT "pets".*, "households_users"."users_id", "households_users"."is_admin" FROM "pets"
         JOIN "households_users" ON "households_users"."households_id" = "pets"."households_id"
         WHERE "pets"."id" = $1 AND "households_users"."users_id" = $2;`
     pool.query(queryText, [req.params.id, req.user.id])
@@ -162,7 +162,7 @@ router.post('/events/meds/:id', rejectUnauthenticated, (req, res) => {
             res.sendStatus(500)
         })
 })
-// UPDATE
+// UPDATE pet information
 router.put('/petInfo', rejectUnauthenticated, (req, res) => {
     queryText=`UPDATE "pets"
         SET "weight" = $1, "age"= $2, "vet_name"=$3, "vet_phone"=$4

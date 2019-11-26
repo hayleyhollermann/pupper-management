@@ -53,7 +53,6 @@ class HomePage extends Component {
           </Fab>
         </div>
         }
-        {/* <pre>{JSON.stringify(this.props.pets[0].is_admin)}</pre> */}
       </div>
     )
   }

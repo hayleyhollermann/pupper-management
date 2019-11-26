@@ -35,7 +35,12 @@ class HomePage extends Component {
       (
     <Paper className="petInfoPaper" elevation={5}>
       <Typography variant="h4" component="h3">
-        {this.props.petInfo.name} <Button onClick={this.editPetInfo}>Edit Pet Info</Button>
+        {this.props.petInfo.name} 
+          {this.props.petInfo && this.props.petInfo.is_admin ? 
+            <Button onClick={this.editPetInfo}>Edit Pet Info</Button>
+            :
+            ''
+          }
       </Typography>
       <Typography component="p">
         Fed: 
@@ -96,9 +101,7 @@ class HomePage extends Component {
     </Paper>) :
       (<h1>this is not your pet!</h1>)
       }
-      {/* <pre>{JSON.stringify(this.props.petInfo)}</pre> */}
-      {/* <pre>{JSON.stringify(this.props.petMeds, null, 2)}</pre>
-      <pre>{JSON.stringify(this.props.events.filter(recentEvents => recentEvents.event_type === 'medication'), null, 2)}</pre> */}
+      <pre>{JSON.stringify(this.props.petInfo, null, 2)}</pre>
       </div>
     )
   }
