@@ -21,6 +21,7 @@ class AddPet extends Component {
       showPt2: false
   }
 
+  // changes specific property in state to input
   editNewPet = (property, event) => {
       this.setState({
           ...this.state,
@@ -31,6 +32,7 @@ class AddPet extends Component {
       })
   }
 
+  // changes to page 2 of AddPet
   addPetPart2 = () => {
     this.setState({
         ...this.state,
@@ -38,6 +40,7 @@ class AddPet extends Component {
     })
   }
 
+  // sends info to addNewPet Saga 
   sumbitPet = () => {
     this.props.dispatch({type: 'ADD_PET', payload: this.state.newPet});
     swal("Done!", `Added ${this.state.newPet.name} to your household!`, "success")
@@ -75,16 +78,6 @@ class AddPet extends Component {
              <TextField margin="dense" variant="outlined" label="Vet Phone" fullWidth={true} value={this.state.newPet.vetPhone}
                 onChange={ (event)=> this.editNewPet('vetPhone', event)}
               />  
-             {/* <h1>Medications</h1>
-             <TextField margin="dense" variant="outlined" label="Medication Name" fullWidth={true} value={this.state.newPet.medName}
-                onChange={ (event)=> this.editNewPet('medName', event)}
-              />  
-             <TextField margin="dense" variant="outlined" label="Amount" fullWidth={true} value={this.state.newPet.medAmount}
-                onChange={ (event)=> this.editNewPet('medAmount', event)}
-              />  
-             <TextField margin="dense" variant="outlined" label="Frequency" fullWidth={true} value={this.state.newPet.medFreq}
-                onChange={ (event)=> this.editNewPet('medFreq', event)}
-              /> */}
              <Button onClick={this.sumbitPet}>Submit</Button>
              <pre>{JSON.stringify(this.state, null, 2)}</pre>
           </div>

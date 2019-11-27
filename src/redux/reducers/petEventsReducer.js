@@ -20,7 +20,7 @@ const householdPetsEvents = (state=[], action) => {
             return state;
     }
 };
-
+// stores 5 most recent times for given event
 const allEventTimes = (state=[], action) => {
     switch (action.type) {
         case 'SET_ALL_TIMES':

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import moment from 'moment';
 import Moment from 'react-moment';
 import 'moment-timezone';
 import {Paper, Typography} from '@material-ui/core';
@@ -30,7 +29,7 @@ class EventTimes extends Component {
       </Typography>
     </Paper>
         ) :
-      (<h1>this is not your pet!</h1>)
+      (<h1>N/A</h1>)
       }
       <pre>{JSON.stringify(this.props.allTimes, null, 2)}</pre>
       </div>
@@ -40,10 +39,6 @@ class EventTimes extends Component {
 
 const mapStateToProps = state => ({
   user: state.user,
-  pets: state.petsReducer.pets,
-  events: state.petEventsReducer.petEvents,
-  petInfo: state.petsReducer.petInfo,
-  petMeds: state.petsReducer.petMeds,
   allTimes: state.petEventsReducer.allEventTimes
 });
 

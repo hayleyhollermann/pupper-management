@@ -17,6 +17,7 @@ class HomePage extends Component {
     this.props.dispatch({type: 'FETCH_MEDS', payload: petId})
   }
 
+  // add new event, sends to addPetEvent Saga
   addNewEvent = (eventToUpdate) => {
     let timeOfEvent = moment().format()
     console.log(eventToUpdate, timeOfEvent)
@@ -27,6 +28,7 @@ class HomePage extends Component {
     this.props.history.push(`/edit-pet-info/${this.props.match.params.id}`)
   }
 
+  // fetches 5 most recent times for specific event
   seeAllEvent = (eventToGet) => {
     this.props.dispatch({type: 'FETCH_ALL_TIMES', payload: {petId: this.props.petInfo.id, eventType: eventToGet}})
     this.props.history.push(`/event-times`)
@@ -113,11 +115,9 @@ class HomePage extends Component {
 
 const mapStateToProps = state => ({
   user: state.user,
-  pets: state.petsReducer.pets,
   events: state.petEventsReducer.petEvents,
   petInfo: state.petsReducer.petInfo,
   petMeds: state.petsReducer.petMeds,
-  allTimes: state.petEventsReducer.allEventTimes
 });
 
 export default connect(mapStateToProps)(HomePage);

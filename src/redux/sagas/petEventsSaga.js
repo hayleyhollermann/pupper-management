@@ -1,6 +1,7 @@
 import { put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
+// gets most recent time for each event for selected pet
 function* getPetEvents (action) {
   console.log('in getPetEvents');
   try {
@@ -11,7 +12,7 @@ function* getPetEvents (action) {
       console.log('error fetching events in eventsResponse', err);
   }
 }
-
+// adds event for selected pet
 function* addPetEvent (action) {
   console.log('in addPetEvent', action.payload);
   try {
@@ -21,7 +22,7 @@ function* addPetEvent (action) {
     console.log('error adding event in addPetEvent Saga', err);
   }
 }
-
+// gets 5 most recent times for specific event for selected dog
 function* getEventTimes (action) {
   console.log('in getEventTimes', action.payload);
   try {
