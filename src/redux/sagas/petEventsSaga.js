@@ -22,21 +22,25 @@ function* addPetEvent (action) {
   }
 }
 
-// function* addMedEvent (action) {
-//   console.log('in addMedEvent', action.payload);
-//   try {
-//     yield axios.post(`/pets/events/meds/${action.payload.petId}`, action.payload)
-//     // yield put({type: 'FETCH_EVENTS', payload: action.payload.petId})
-//   } catch (err) {
-//     console.log('error adding event in addPetEvent Saga', err);
-//   }
-// }
+function* getEventTimes (action) {
+  console.log('in getEventTimes', action.payload);
+  try {
+    const eventTimesResponse = yield axios.get(`/pets/events-one-type`, {
+        params: {
+          petId: action.payload.petId,
+          eventType: action.payload.eventType
+        }
+    })
+    yield put({type: 'SET_ALL_TIMES', payload: eventTimesResponse.data})
+  } catch (err) {
+    console.log('error adding event in getEventTimes Saga', err);
+  }
+}
 
 function* petEventsSaga() {
   yield takeEvery('FETCH_EVENTS', getPetEvents)
   yield takeEvery('ADD_EVENT', addPetEvent)
-  // yield takeEvery('ADD_MED_EVENT', addMedEvent)
-
+  yield takeEvery('FETCH_ALL_TIMES', getEventTimes)
 }
 
 export default petEventsSaga;

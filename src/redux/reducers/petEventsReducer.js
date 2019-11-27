@@ -21,7 +21,18 @@ const householdPetsEvents = (state=[], action) => {
     }
 };
 
+const allEventTimes = (state=[], action) => {
+    switch (action.type) {
+        case 'SET_ALL_TIMES':
+            console.log('in allEventTimes reducer');
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
     petEvents,
-    householdPetsEvents
+    householdPetsEvents,
+    allEventTimes
 });

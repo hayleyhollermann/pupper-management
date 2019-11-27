@@ -12,7 +12,6 @@ class HomePage extends Component {
 
   componentDidMount () {    
     let petId = this.props.match.params.id
-    console.log('petId =');
     this.props.dispatch({type: 'FETCH_EVENTS', payload: petId})
     this.props.dispatch({type: 'FETCH_PET', payload: petId})
     this.props.dispatch({type: 'FETCH_MEDS', payload: petId})
@@ -26,6 +25,11 @@ class HomePage extends Component {
 
   editPetInfo = () => {
     this.props.history.push(`/edit-pet-info/${this.props.match.params.id}`)
+  }
+
+  seeAllEvent = (eventToGet) => {
+    this.props.dispatch({type: 'FETCH_ALL_TIMES', payload: {petId: this.props.petInfo.id, eventType: eventToGet}})
+    // this.props.history.push(`/event-times`)
   }
 
   render() {
@@ -53,7 +57,7 @@ class HomePage extends Component {
             <Button onClick={ () => this.addNewEvent('fed')} >
                 Update!
             </Button>
-            <Fab size="small"><FormatListBulletedIcon /></Fab>
+            <Fab size="small" onClick={ () => this.seeAllEvent('fed')}><FormatListBulletedIcon /></Fab>
             <br />
       </Typography>
       <Typography component="p">
@@ -67,7 +71,7 @@ class HomePage extends Component {
             <Button onClick={ () => this.addNewEvent('walked')} >
                 Update!
             </Button>
-            <Fab size="small"><FormatListBulletedIcon /></Fab>
+            <Fab size="small" onClick={ () => this.seeAllEvent('walked')}><FormatListBulletedIcon /></Fab>
             <br />
       </Typography>
       <Typography component="p">
@@ -81,7 +85,7 @@ class HomePage extends Component {
             <Button onClick={ () => this.addNewEvent('last outside')} >
                 Update!
             </Button>
-            <Fab size="small"><FormatListBulletedIcon /></Fab>
+            <Fab size="small" onClick={ () => this.seeAllEvent('last outside')}><FormatListBulletedIcon /></Fab>
             <br />
       </Typography>
       <Typography component="p">
@@ -101,7 +105,7 @@ class HomePage extends Component {
     </Paper>) :
       (<h1>this is not your pet!</h1>)
       }
-      <pre>{JSON.stringify(this.props.petInfo, null, 2)}</pre>
+      <pre>{JSON.stringify(this.props.allTimes, null, 2)}</pre>
       </div>
     )
   }
@@ -112,7 +116,8 @@ const mapStateToProps = state => ({
   pets: state.petsReducer.pets,
   events: state.petEventsReducer.petEvents,
   petInfo: state.petsReducer.petInfo,
-  petMeds: state.petsReducer.petMeds
+  petMeds: state.petsReducer.petMeds,
+  allTimes: state.petEventsReducer.allEventTimes
 });
 
 export default connect(mapStateToProps)(HomePage);

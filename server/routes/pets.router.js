@@ -3,20 +3,6 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-// function checkIfAdmin(userId, selectedHousehold) {
-//     queryText=`SELECT "households"."id", "households"."name", "households_users"."users_id", "user"."username", "households_users"."is_admin", "user"."selected_household_id" FROM "households"
-//         JOIN "households_users" ON "households_users"."households_id"="households"."id"
-//         JOIN "user" ON "user"."id"="households_users"."users_id"
-//         WHERE "user"."id"=$1 AND "households"."id"=$2;`
-//     pool.query(queryText, [userId, selectedHousehold])
-//         .then((results) => {
-//             res.send(results.rows.is_admin)
-//         })
-//         .catch((err) => {
-//             console.log('error in checkIfAdmin', err);
-//             res.sendStatus(500)
-//         })
-// }
 
 //--------GETS---------
 // GET all pets in a household
@@ -100,7 +86,25 @@ router.get('/hh-events', rejectUnauthenticated, (req, res) => {
             console.log('error in get /pets/hh-events', err);
         })
 })
-
+// GET all events of one type for a pet
+router.get('/events-one-type', rejectUnauthenticated, (req, res) => {
+    console.log('in GET /pets/events-one-type', req.query.eventType, req.query.petId);
+    // console.log('in /hh-events', req.user.selected_household_id);
+    queryText = `SELECT "pets"."id", "pets"."name", "pets_events"."time", "events"."type" FROM "pets_events" 
+        JOIN "events" ON "events"."id"="pets_events"."events_id"
+        JOIN "pets" ON "pets"."id"="pets_events"."pets_id"
+        JOIN "households_users" ON "households_users"."households_id" = "pets"."households_id"
+        WHERE "pets"."id"=$1 AND "events"."id"=(SELECT "events"."id" FROM "events" WHERE "events"."type"=$2) 
+        AND "households_users"."users_id" = $3;`
+    pool.query(queryText, [req.query.petId, req.query.eventType, req.user.id])
+        .then((results) => {
+            console.log('results.rows:', results.rows);
+            res.send(results.rows)
+        })
+        .catch((err) => {
+            console.log('error in get /events/one-type', err);
+        })
+})
 //----------POSTS----------
 // ADD a pet to a household
 router.post('/', rejectUnauthenticated, (req, res) => {
@@ -144,18 +148,6 @@ router.post('/events/:id', rejectUnauthenticated, (req, res) => {
             res.sendStatus(500)
         })
 })
-// ADDS a new med event for a pet
-// router.post('/events/meds/:id', rejectUnauthenticated, (req, res) => {
-//     console.log('in post /pets/events', req.params.id, req.body);
-//     queryText = `INSERT INTO "pets_events" ("pets_id", "time", "events_id", "medications_id")
-//         VALUES ($1, $2, $3, $4);`
-//     pool.query(queryText, [req.params.id, req.body.time, '4', req.body.med_type])
-//         .then(() => res.sendStatus(200))
-//         .catch((err) => {
-//             console.log('error adding an event in POST /pets/events/meds', err);
-//             res.sendStatus(500)
-//         })
-// })
 // ------ PUT's -------
 // UPDATE pet information
 router.put('/petInfo', rejectUnauthenticated, (req, res) => {
