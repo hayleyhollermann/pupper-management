@@ -29,7 +29,7 @@ class HomePage extends Component {
 
   seeAllEvent = (eventToGet) => {
     this.props.dispatch({type: 'FETCH_ALL_TIMES', payload: {petId: this.props.petInfo.id, eventType: eventToGet}})
-    // this.props.history.push(`/event-times`)
+    this.props.history.push(`/event-times`)
   }
 
   render() {

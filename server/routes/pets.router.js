@@ -90,12 +90,14 @@ router.get('/hh-events', rejectUnauthenticated, (req, res) => {
 router.get('/events-one-type', rejectUnauthenticated, (req, res) => {
     console.log('in GET /pets/events-one-type', req.query.eventType, req.query.petId);
     // console.log('in /hh-events', req.user.selected_household_id);
-    queryText = `SELECT "pets"."id", "pets"."name", "pets_events"."time", "events"."type" FROM "pets_events" 
+    queryText = `SELECT "pets"."id" AS "pet_id", "pets_events"."id", "pets"."name", "pets_events"."time", "events"."type" FROM "pets_events" 
         JOIN "events" ON "events"."id"="pets_events"."events_id"
         JOIN "pets" ON "pets"."id"="pets_events"."pets_id"
         JOIN "households_users" ON "households_users"."households_id" = "pets"."households_id"
         WHERE "pets"."id"=$1 AND "events"."id"=(SELECT "events"."id" FROM "events" WHERE "events"."type"=$2) 
-        AND "households_users"."users_id" = $3;`
+        AND "households_users"."users_id" = $3
+        ORDER BY "pets_events"."time" DESC
+        LIMIT 5;`
     pool.query(queryText, [req.query.petId, req.query.eventType, req.user.id])
         .then((results) => {
             console.log('results.rows:', results.rows);

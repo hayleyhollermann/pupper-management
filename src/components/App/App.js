@@ -25,6 +25,7 @@ import AddUserToHousehold from '../AddUserToHousehold/AddUserToHousehold';
 import ChangeHousehold from '../ChangeHousehold/ChangeHousehold';
 import CreateHousehold from '../CreateHousehold/CreateHousehold';
 import EditPetInfo from '../EditPetInfo/EditPetInfo';
+import EventTimes from '../EventTimes/EventTimes';
 
 class App extends Component {
   componentDidMount () {
@@ -68,6 +69,7 @@ class App extends Component {
             <ProtectedRoute exact path="/change-household" component={ChangeHousehold}/>
             <ProtectedRoute exact path="/create-household" component={CreateHousehold}/>
             <ProtectedRoute exact path="/edit-pet-info/:id" component={EditPetInfo}/>
+            <ProtectedRoute exact path="/event-times" component={(EventTimes)}/>
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
