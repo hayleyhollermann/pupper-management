@@ -57,7 +57,7 @@ class EditVetPhone extends Component {
             } <Fab size="small" onClick={this.toggleEdit}><EditIcon/></Fab>
           </div>
         : <div>
-            <Input placeholder='vet name' onChange={this.vetPhoneInput}/>
+            <Input placeholder='vet phone' onChange={this.vetPhoneInput}/>
             <Fab size="small" onClick={this.submitChange}><DoneIcon/></Fab>
         </div>
         }
