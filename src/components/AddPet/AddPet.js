@@ -18,7 +18,6 @@ class AddPet extends Component {
           vetName: '',
           vetPhone: ''
       },
-      showPt2: false
   }
 
   // changes specific property in state to input
@@ -30,14 +29,6 @@ class AddPet extends Component {
             [property]: event.target.value
           },
       })
-  }
-
-  // changes to page 2 of AddPet
-  addPetPart2 = () => {
-    this.setState({
-        ...this.state,
-        showPt2: !this.state.showPt2
-    })
   }
 
   // sends info to addNewPet Saga 
@@ -77,7 +68,6 @@ class AddPet extends Component {
              <Button variant="contained" onClick={this.sumbitPet}>Submit</Button>
           </div>
         </Paper>
-        <pre>{JSON.stringify(this.state, null, 2)}</pre>
       </div>
     )
   }
