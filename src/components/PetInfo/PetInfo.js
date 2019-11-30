@@ -39,15 +39,11 @@ class HomePage extends Component {
       <div className="paperDiv">
       {this.props.petInfo ? 
       (
+    <div>
+    <Typography className="centerTitle" variant="h4" component="h2">
+      {this.props.petInfo.name} 
+    </Typography> <br/>
     <Paper className="paperArea" elevation={5}>
-      <Typography variant="h4" component="h2">
-        {this.props.petInfo.name} 
-          {this.props.petInfo && this.props.petInfo.is_admin ? 
-            <Button onClick={this.editPetInfo}>Edit Pet Info</Button>
-            :
-            ''
-          }
-      </Typography>
       <Typography variant="h5" component="h3">
         Fed: 
       </Typography>
@@ -96,21 +92,31 @@ class HomePage extends Component {
             <Fab size="small" onClick={ () => this.seeAllEvent('last outside')}><FormatListBulletedIcon /></Fab>
             <br />
       </Typography>
-      <Typography component="p">
-        Breed: {this.props.petInfo.breed} <br />
-        Weight: {this.props.petInfo.weight} <br />
-        Age: {this.props.petInfo.age} <br />
-        Vet Name: {
+      </Paper> <br/>
+      <Paper className="paperArea" elevation={5}>
+        <Typography variant="h5" component="h3">
+          General Info: 
+            {this.props.petInfo && this.props.petInfo.is_admin ? 
+              <Button onClick={this.editPetInfo}>Edit Pet Info</Button>
+            : ''
+            }
+        </Typography>
+        <Typography component="p">
+          Breed: {this.props.petInfo.breed} <br />
+          Weight: {this.props.petInfo.weight} <br />
+          Age: {this.props.petInfo.age} <br />
+          Vet Name: {
             this.props.petInfo.vet_name ? this.props.petInfo.vet_name
             : 'No vet name on file'
-        } <br />
-        Vet Phone: {
+          } <br />
+          Vet Phone: {
             this.props.petInfo.vet_phone ? this.props.petInfo.vet_phone
             : 'No vet phone on file'        
         } <br />
       </Typography>
       <Medications />
-    </Paper>) :
+    </Paper>
+    </div>) :
       (<h1>this is not your pet!</h1>)
       }
       <pre>{JSON.stringify(this.props.allTimes, null, 2)}</pre>

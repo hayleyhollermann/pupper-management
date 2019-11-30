@@ -34,3 +34,8 @@ button.nav-link {
 .nav-right {
   float: right;
 }
+
+.svg-icon {
+  fill: white;
+  margin-left: 10px;
+}

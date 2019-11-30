@@ -2,12 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
+import SVG from '../PawPrintSvg/PawPrintSvg';
 import './Nav.css';
 
 const Nav = (props) => (
   <div className="nav">
     <Link to="/home">
-      <h2 className="nav-title">PupperManagement</h2>
+      <h1 className="nav-title">PupperManagement</h1><br/>
+      <SVG width={80} fill="#FFF" />
     </Link>
     <div className="nav-right">
       <Link className="nav-link" to="/home">
