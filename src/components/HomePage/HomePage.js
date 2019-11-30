@@ -36,9 +36,11 @@ class HomePage extends Component {
               : [] } />
             )} <br />
           {this.props.pets && this.props.pets.length>0 && this.props.pets[0].is_admin ? 
-            <Fab variant="extended" size='large' onClick={this.addAPetForm}>
-              <AddRoundedIcon /> Add a Pet
-            </Fab>
+            <div className="center">
+              <Fab variant="extended" size='large' onClick={this.addAPetForm}>
+                <AddRoundedIcon /> Add a Pet
+              </Fab>
+            </div>
             :
             ''
           }
@@ -46,9 +48,11 @@ class HomePage extends Component {
         : 
         <div>
           <h2>Get started by creating a household!</h2>
-          <Fab variant="extended" size='large' onClick={this.createHousehold}>
-            <AddRoundedIcon /> Create a Household
-          </Fab>
+          <div className="center">
+            <Fab variant="extended" size='large' onClick={this.createHousehold}>
+              <AddRoundedIcon /> Create a Household
+            </Fab>
+          </div>
         </div>
         }
         {/* <pre>{JSON.stringify(this.props.user)}</pre> */}
