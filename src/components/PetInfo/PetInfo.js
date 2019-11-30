@@ -39,8 +39,8 @@ class HomePage extends Component {
       <div className="paperDiv">
       {this.props.petInfo ? 
       (
-    <Paper className="petInfoPaper" elevation={5}>
-      <Typography variant="h4" component="h3">
+    <Paper className="paperArea" elevation={5}>
+      <Typography variant="h4" component="h2">
         {this.props.petInfo.name} 
           {this.props.petInfo && this.props.petInfo.is_admin ? 
             <Button onClick={this.editPetInfo}>Edit Pet Info</Button>
@@ -48,8 +48,10 @@ class HomePage extends Component {
             ''
           }
       </Typography>
-      <Typography component="p">
+      <Typography variant="h5" component="h3">
         Fed: 
+      </Typography>
+      <Typography component="p">
             {(this.props.events.length > 0) && 
                 (this.props.events.filter(recentEvents => recentEvents.event_type === 'fed').length > 0) ? 
                 <Moment format='LLLL'>
@@ -62,8 +64,10 @@ class HomePage extends Component {
             <Fab size="small" onClick={ () => this.seeAllEvent('fed')}><FormatListBulletedIcon /></Fab>
             <br />
       </Typography>
-      <Typography component="p">
+      <Typography variant="h5" component="h3">
         Walked: 
+      </Typography>
+      <Typography component="p">
             {(this.props.events.length > 0) && 
                 (this.props.events.filter(recentEvents => recentEvents.event_type === 'walked').length > 0) ?  
                 <Moment format='LLLL'>
@@ -76,8 +80,10 @@ class HomePage extends Component {
             <Fab size="small" onClick={ () => this.seeAllEvent('walked')}><FormatListBulletedIcon /></Fab>
             <br />
       </Typography>
-      <Typography component="p">
+      <Typography variant="h5" component="h3">
         Last Outside: 
+      </Typography>
+      <Typography component="p">
             {(this.props.events.length > 0) && 
                 (this.props.events.filter(recentEvents => recentEvents.event_type === 'last outside').length > 0) ? 
                 <Moment format='LLLL'>

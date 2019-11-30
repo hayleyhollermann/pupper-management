@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Input, Fab } from '@material-ui/core';
+import { Input, Fab, Typography } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import DoneIcon from '@material-ui/icons/Done';
 
@@ -49,12 +49,15 @@ class EditPetWeight extends Component {
   render() {
     return (
       <>
-        <p>Weight:</p>
+        <Typography variant="h5" component="h3">
+          Weight: 
+        </Typography>
         {!this.state.showInput ? 
           <div>
-            {(this.props.petInfo.weight) ? <span>{this.props.petInfo.weight}lbs </span> 
+            <Fab size="small" onClick={this.toggleEdit}><EditIcon/></Fab>
+            {(this.props.petInfo.weight) ? <span className="editInfo"> {this.props.petInfo.weight}lbs </span> 
             : '' 
-            } <Fab size="small" onClick={this.toggleEdit}><EditIcon/></Fab>
+            } 
           </div>
         : <div>
             <Input placeholder='weight' onChange={this.weightInput}/>

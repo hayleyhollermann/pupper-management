@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Input, Fab } from '@material-ui/core';
+import { Input, Fab, Typography } from '@material-ui/core';
 import DoneIcon from '@material-ui/icons/Done';
 
 
@@ -50,12 +50,15 @@ class EditPetAge extends Component {
   render() {
     return (
       <>
-        <p>Age:</p>
+        <Typography variant="h5" component="h3">
+          Age: 
+        </Typography>
         {!this.state.showInput ? 
           <div>
-            {(this.props.petInfo.age) ? <span>{this.props.petInfo.age} years </span> 
+            <Fab size="small" onClick={this.toggleEdit}><EditIcon/></Fab>
+            {(this.props.petInfo.age) ? <span className="editInfo"> {this.props.petInfo.age} years </span> 
             : '' 
-            } <Fab size="small" onClick={this.toggleEdit}><EditIcon/></Fab>
+            } 
           </div>
         : <div>
             <Input placeholder='age' onChange={this.ageInput}/>

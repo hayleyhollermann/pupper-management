@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Button, Input } from '@material-ui/core';
+import { Button, Input, Typography } from '@material-ui/core';
 // import swal from 'sweetalert';
 
 
@@ -47,7 +47,9 @@ class EditMedicationsTable extends Component {
     return (
       <>
         <div>
-          <h3>Medications: </h3>
+          <Typography className="centerTitle" variant="h4" component="h3">
+            Medications: 
+          </Typography>            
             <table> 
               <thead>
                 <tr>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Typography} from '@material-ui/core';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import 'moment-timezone';
@@ -19,34 +20,38 @@ class Medications extends Component {
     return (
       <>
         <div>
-          <h3>Medications: </h3>
-            <table> 
-              <thead>
-                <tr>
-                  <th>Med Name</th>
-                  <th>Amount</th>
-                  <th>Frequency</th>
-                </tr>
-              </thead>
-              <tbody>
-                {(this.props.petMeds.length > 0 ? 
-                  this.props.petMeds.map((med) => 
-                    <tr key={med.med_id}>
-                      <td>{med.type}</td>
-                      <td>{med.quantity}</td>
-                      <td>{med.frequency}</td>
-                    </tr>
-                  )
-                : 
-                  <tr>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
+          <Typography variant="h5" component="h3">
+            Medications: 
+          </Typography> 
+          <div className="tableDiv">          
+          <table> 
+            <thead>
+              <tr>
+                <th>Med Name</th>
+                <th>Amount</th>
+                <th>Frequency</th>
+              </tr>
+            </thead>
+            <tbody>
+              {(this.props.petMeds.length > 0 ? 
+                this.props.petMeds.map((med) => 
+                  <tr key={med.med_id}>
+                    <td>{med.type}</td>
+                    <td>{med.quantity}</td>
+                    <td>{med.frequency}</td>
                   </tr>
-                )}
-              </tbody>
-            </table>
+                )
+              : 
+                <tr>
+                  <td> </td>
+                  <td> </td>
+                  <td> </td>
+                  <td> </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+          </div> 
         </div>
       </>
     )

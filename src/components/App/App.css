@@ -39,6 +39,10 @@ input {
     margin: 3%;
 }
 
+.paperArea {
+    padding: 3%;
+}
+
 .cardDiv {
     margin: 3%;  
 }
@@ -46,4 +50,36 @@ input {
 .logInReg {
     margin: 3%;  
     text-align: center;
+}
+
+table {  
+    color: #333; /* Lighten up font color */
+    font-family: Helvetica, Arial, sans-serif; /* Nicer font */
+    width: 100%; 
+    border-collapse: collapse; 
+    border-spacing: 0; 
+}
+
+td, th { border: 1px solid #CCC; } /* Make cells a bit taller */
+
+th {  
+    background: #F3F3F3; /* Light grey background */
+    font-weight: bold; /* Make sure they're bold */
+}
+
+td {  
+    background: #FAFAFA; /* Lighter grey background */
+    text-align: center; /* Center our text */
+}
+
+.tableDiv {
+    text-align: center;
+}
+
+.centerTitle {
+    text-align: center;
+}
+
+.editInfo {
+    font-size: 20px;
 }

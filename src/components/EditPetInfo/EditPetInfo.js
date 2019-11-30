@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { Paper, Typography } from '@material-ui/core';
 import EditMedicationsTable from '../EditMedicationsTable/EditMedicationsTable';
 import EditPetWeight from '../EditPetWeight/EditPetWeight';
 import EditPetAge from '../EditPetAge/EditPetAge';
@@ -22,15 +23,21 @@ class EditPetInfo extends Component {
   render() {
     return (
       <>
-        <div>
-            <h3>General Info</h3>
+        <div className="paperDiv">
+          <Paper className="paperArea">
+            <Typography className="centerTitle" variant="h4" component="h3">
+              General Info: 
+            </Typography>
             <EditPetWeight petId={this.props.match.params.id}/>
             <EditPetAge petId={this.props.match.params.id}/>
-            <h3>Vet Info:</h3>
+            <Typography className="centerTitle" variant="h4" component="h3">
+              Vet Info: 
+            </Typography>
             <EditVetName petId={this.props.match.params.id}/>
             <EditVetPhone petId={this.props.match.params.id}/>
             <EditMedicationsTable/>
-          </div>
+          </Paper>
+        </div>
       </>
     )
   }

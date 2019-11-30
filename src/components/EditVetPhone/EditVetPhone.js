@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Input, Fab } from '@material-ui/core';
+import { Input, Fab, Typography } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import DoneIcon from '@material-ui/icons/Done';
 
@@ -49,12 +49,15 @@ class EditVetPhone extends Component {
   render() {
     return (
       <>
-        <p>Vet Phone:</p>
+        <Typography variant="h5" component="h3">
+          Vet Phone: 
+        </Typography>
         {!this.state.showInput ? 
           <div>
-            {(this.props.petInfo.vet_phone) ? <span>{this.props.petInfo.vet_phone}</span> 
+            <Fab size="small" onClick={this.toggleEdit}><EditIcon/></Fab>
+            {(this.props.petInfo.vet_phone) ? <span className="editInfo"> {this.props.petInfo.vet_phone}</span> 
             : '' 
-            } <Fab size="small" onClick={this.toggleEdit}><EditIcon/></Fab>
+            } 
           </div>
         : <div>
             <Input placeholder='vet phone' onChange={this.vetPhoneInput}/>
