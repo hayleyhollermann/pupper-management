@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Paper } from '@material-ui/core';
 import { withRouter } from 'react-router-dom';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import HomeIcon from '@material-ui/icons/Home';
 
 
 
@@ -18,9 +20,9 @@ class Settings extends Component {
   render() {
     return (
       <div className="paperDiv">    
-        <Paper className="settings" elevation={5}>
-          <Button variant="contained" onClick={this.addUserForm}>ADD USER TO HOUSEHOLD</Button>
-          <Button variant="contained" onClick={this.switchHouseholdsForm}>SWITCH HOUSEHOLDS</Button>
+        <Paper className="paperArea centerTitle" elevation={5}>
+          <Button variant="contained" onClick={this.addUserForm}><PersonAddIcon/>  ADD USER TO HOUSEHOLD</Button><br/><br/>
+          <Button variant="contained" onClick={this.switchHouseholdsForm}><HomeIcon/> SWITCH HOUSEHOLDS</Button>
           {/* {/* stretch */}
           {/* <Button>EDIT ACCOUNT INFO</Button> 
           <Button>LOG OUT</Button>  */}

@@ -51,7 +51,7 @@ class HomePage extends Component {
           </Fab>
         </div>
         }
-        <pre>{JSON.stringify(this.props.user)}</pre>
+        {/* <pre>{JSON.stringify(this.props.user)}</pre> */}
       </div>
     )
   }
