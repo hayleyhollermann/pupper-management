@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Button, TextField } from '@material-ui/core';
+import { Button, TextField, Paper } from '@material-ui/core';
 import swal from 'sweetalert';
 
 
@@ -51,10 +51,10 @@ class AddPet extends Component {
 
   render() {
     return (
-      <>
-        { !this.state.showPt2 ? 
+      <div className="paperDiv">
+        <Paper className="paperArea center"> 
             <div>
-              <h1>General Info</h1>
+              <h2>General Info</h2>
               <TextField margin="dense" variant="outlined" label="Name" fullWidth={true} value={this.state.newPet.name}
                 onChange={ (event)=> this.editNewPet('name', event)}
               /> 
@@ -67,22 +67,18 @@ class AddPet extends Component {
               <TextField margin="dense" variant="outlined" label="Age (years)" fullWidth={true} value={this.state.newPet.age}
                 onChange={ (event)=> this.editNewPet('age', event)}
               /> 
-              <Button onClick={this.addPetPart2}>NEXT</Button>
-            </div>
-          : 
-          <div>
-             <h1>Vet Info</h1>
+             <h2>Vet Info</h2>
              <TextField margin="dense" variant="outlined" label="Vet Name" fullWidth={true} value={this.state.newPet.vetName}
                 onChange={ (event)=> this.editNewPet('vetName', event)}
               />  
              <TextField margin="dense" variant="outlined" label="Vet Phone" fullWidth={true} value={this.state.newPet.vetPhone}
                 onChange={ (event)=> this.editNewPet('vetPhone', event)}
               />  
-             <Button onClick={this.sumbitPet}>Submit</Button>
-             <pre>{JSON.stringify(this.state, null, 2)}</pre>
+             <Button variant="contained" onClick={this.sumbitPet}>Submit</Button>
           </div>
-        }
-      </>
+        </Paper>
+        <pre>{JSON.stringify(this.state, null, 2)}</pre>
+      </div>
     )
   }
 }
