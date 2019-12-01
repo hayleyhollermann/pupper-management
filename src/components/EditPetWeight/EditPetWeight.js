@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Input, Fab, Typography } from '@material-ui/core';
+import { Input, Fab, Typography, Button } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import DoneIcon from '@material-ui/icons/Done';
 
@@ -49,7 +49,7 @@ class EditPetWeight extends Component {
   render() {
     return (
       <>
-        <Typography variant="h5" component="h3">
+        <Typography variant="h6" component="h3">
           Weight: 
         </Typography>
         {!this.state.showInput ? 

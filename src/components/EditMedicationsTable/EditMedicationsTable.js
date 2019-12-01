@@ -47,7 +47,7 @@ class EditMedicationsTable extends Component {
     return (
       <>
         <div>
-          <Typography className="centerTitle" variant="h4" component="h3">
+          <Typography className="centerTitle" variant="h5" component="h3">
             Medications: 
           </Typography>            
             <table> 

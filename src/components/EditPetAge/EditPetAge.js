@@ -50,7 +50,7 @@ class EditPetAge extends Component {
   render() {
     return (
       <>
-        <Typography variant="h5" component="h3">
+        <Typography variant="h6" component="h3">
           Age: 
         </Typography>
         {!this.state.showInput ? 

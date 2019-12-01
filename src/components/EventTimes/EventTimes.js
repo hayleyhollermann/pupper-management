@@ -9,7 +9,6 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 class EventTimes extends Component {
 
   backToPetInfo = (petId) => {
-    console.log('going back');
     this.props.history.push(`/home/${petId}`)
   }
 

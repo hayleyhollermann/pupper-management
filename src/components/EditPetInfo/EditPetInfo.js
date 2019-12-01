@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Paper, Typography } from '@material-ui/core';
+import { Paper, Typography, Button } from '@material-ui/core';
 import EditMedicationsTable from '../EditMedicationsTable/EditMedicationsTable';
 import EditPetWeight from '../EditPetWeight/EditPetWeight';
 import EditPetAge from '../EditPetAge/EditPetAge';
 import EditVetName from '../EditVetName/EditVetName';
 import EditVetPhone from '../EditVetPhone/EditVetPhone';
-
-// import swal from 'sweetalert';
-
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 
 class EditPetInfo extends Component {
@@ -20,17 +18,22 @@ class EditPetInfo extends Component {
     this.props.dispatch({type: 'FETCH_MEDS', payload: petId})
   }
 
+  backToPetInfo = (petId) => {
+    this.props.history.push(`/home/${petId}`)
+  }
+
   render() {
     return (
       <>
         <div className="paperDiv">
+        <Button onClick={ () => this.backToPetInfo(this.props.petInfo.id)}><ArrowBackIcon/></Button>
           <Paper className="paperArea">
-            <Typography className="centerTitle" variant="h4" component="h3">
+            <Typography className="centerTitle" variant="h5" component="h3">
               General Info: 
             </Typography>
             <EditPetWeight petId={this.props.match.params.id}/>
             <EditPetAge petId={this.props.match.params.id}/>
-            <Typography className="centerTitle" variant="h4" component="h3">
+            <Typography className="centerTitle" variant="h5" component="h3">
               Vet Info: 
             </Typography>
             <EditVetName petId={this.props.match.params.id}/>

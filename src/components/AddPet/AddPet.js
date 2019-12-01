@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Button, TextField, Paper } from '@material-ui/core';
+import { Button, TextField, Paper, Typography } from '@material-ui/core';
 import swal from 'sweetalert';
 
 
@@ -45,7 +45,7 @@ class AddPet extends Component {
       <div className="paperDiv">
         <Paper className="paperArea center"> 
             <div>
-              <h2>General Info</h2>
+              <Typography variant="h5" component="h3">General Info</Typography>
               <TextField margin="dense" variant="outlined" label="Name" fullWidth={true} value={this.state.newPet.name}
                 onChange={ (event)=> this.editNewPet('name', event)}
               /> 
@@ -58,7 +58,7 @@ class AddPet extends Component {
               <TextField margin="dense" variant="outlined" label="Age (years)" fullWidth={true} value={this.state.newPet.age}
                 onChange={ (event)=> this.editNewPet('age', event)}
               /> 
-             <h2>Vet Info</h2>
+             <Typography variant="h5" component="h3">Vet Info</Typography>
              <TextField margin="dense" variant="outlined" label="Vet Name" fullWidth={true} value={this.state.newPet.vetName}
                 onChange={ (event)=> this.editNewPet('vetName', event)}
               />  

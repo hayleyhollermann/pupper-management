@@ -49,7 +49,7 @@ class EditVetPhone extends Component {
   render() {
     return (
       <>
-        <Typography variant="h5" component="h3">
+        <Typography variant="h6" component="h3">
           Vet Phone: 
         </Typography>
         {!this.state.showInput ? 

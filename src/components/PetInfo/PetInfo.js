@@ -54,11 +54,12 @@ class HomePage extends Component {
                     {this.props.events.filter(recentEvents => recentEvents.event_type === 'fed')[0].time}
                 </Moment>
             : 'N/A'  } 
-            <Button onClick={ () => this.addNewEvent('fed')} >
-                Update!
-            </Button>
-            <Fab size="small" onClick={ () => this.seeAllEvent('fed')}><FormatListBulletedIcon /></Fab>
-            <br />
+            <Button variant="outlined" size="small" onClick={ () => this.addNewEvent('fed')} >
+                Update
+            </Button> 
+            <Button variant="outlined" size="small" onClick={ () => this.seeAllEvent('fed')}>History</Button>
+            {/* <Fab size="small" onClick={ () => this.seeAllEvent('fed')}><FormatListBulletedIcon /></Fab> */}
+            <br /><br />
       </Typography>
       <Typography variant="h5" component="h3">
         Walked: 
@@ -70,11 +71,12 @@ class HomePage extends Component {
                     {this.props.events.filter(recentEvents => recentEvents.event_type === 'walked')[0].time}
                 </Moment>
             : 'N/A'  } 
-            <Button onClick={ () => this.addNewEvent('walked')} >
-                Update!
+            <Button variant="outlined" size="small" onClick={ () => this.addNewEvent('walked')} >
+                Update
             </Button>
-            <Fab size="small" onClick={ () => this.seeAllEvent('walked')}><FormatListBulletedIcon /></Fab>
-            <br />
+            <Button variant="outlined" size="small" onClick={ () => this.seeAllEvent('fed')}>History</Button>
+            {/* <Fab size="small" onClick={ () => this.seeAllEvent('walked')}><FormatListBulletedIcon /></Fab> */}
+            <br /><br />
       </Typography>
       <Typography variant="h5" component="h3">
         Last Outside: 
@@ -86,20 +88,17 @@ class HomePage extends Component {
                     {this.props.events.filter(recentEvents => recentEvents.event_type === 'last outside')[0].time}
                 </Moment>
             : 'N/A'  } 
-            <Button onClick={ () => this.addNewEvent('last outside')} >
-                Update!
+            <Button variant="outlined" size="small"onClick={ () => this.addNewEvent('last outside')} >
+                Update
             </Button>
-            <Fab size="small" onClick={ () => this.seeAllEvent('last outside')}><FormatListBulletedIcon /></Fab>
-            <br />
+            <Button variant="outlined" size="small" onClick={ () => this.seeAllEvent('fed')}>History</Button>
+            {/* <Fab size="small" onClick={ () => this.seeAllEvent('last outside')}><FormatListBulletedIcon /></Fab> */}
+            <br /><br/>
       </Typography>
       </Paper> <br/>
       <Paper className="paperArea" elevation={5}>
-        <Typography variant="h5" component="h3">
+        <Typography className="centerTitle" variant="h5" component="h3">
           General Info: 
-            {this.props.petInfo && this.props.petInfo.is_admin ? 
-              <Button onClick={this.editPetInfo}>Edit Pet Info</Button>
-            : ''
-            }
         </Typography>
         <Typography component="p">
           Breed: {this.props.petInfo.breed} <br />
@@ -115,6 +114,10 @@ class HomePage extends Component {
         } <br />
       </Typography>
       <Medications />
+      {this.props.petInfo && this.props.petInfo.is_admin ? 
+          <div className="center"><Button onClick={this.editPetInfo}>Edit Pet Info</Button></div>
+        : ''
+      }
     </Paper>
     </div>) :
       (<h1>this is not your pet!</h1>)

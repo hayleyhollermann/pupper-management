@@ -1,7 +1,7 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
-    background-image: url(beanstalk.png);
+    background-image: url(green_dust_scratch.png);
     background-repeat: inherit;
 }
 
@@ -41,6 +41,7 @@ input {
 
 .paperArea {
     padding: 3%;
+    color: honeydew;
 }
 
 .cardDiv {
@@ -81,5 +82,9 @@ td {
 }
 
 .editInfo {
-    font-size: 20px;
+    font-size: 18px;
+}
+
+.editArea {
+    padding-left: 8%;
 }
