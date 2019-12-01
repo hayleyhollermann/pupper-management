@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PetCard from '../PetCard/PetCard';
-import {Fab} from '@material-ui/core';
+import {Fab, Typography} from '@material-ui/core';
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
 import { withRouter } from 'react-router-dom';
 
@@ -25,9 +25,12 @@ class HomePage extends Component {
   render() {
     return (
       <div>
-        <h1 id="welcome">
+        <Typography className="centerTitle" variant="h4" component="h2">
+          Welcome, {this.props.user.username}! 
+        </Typography>
+        {/* <h1 id="welcome">
           Welcome, {this.props.user.username}!
-        </h1>
+        </h1> */}
         { this.props.user.selected_household_id ? 
         <div>
             {this.props.pets.map((pet) => 

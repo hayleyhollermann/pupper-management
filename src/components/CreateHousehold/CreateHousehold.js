@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {Button, Input, Paper} from '@material-ui/core';
+import {Button, Input, Paper, Typography} from '@material-ui/core';
 import { withRouter } from 'react-router-dom';
 
 class CreateHousehold extends Component {
@@ -23,13 +23,12 @@ class CreateHousehold extends Component {
   render() {
     return (
       <div className="paperDiv">
-        <Paper className="createHousehold" elevation={5}>
-          <h3>Create a household</h3>
+        <Paper className="paperArea center" elevation={5}>
+          <Typography className="centerTitle" variant="h5" component="h2">
+            Create a household 
+          </Typography>
           <Input placeholder="household name" onChange={this.createHouseholdName}/>
-          {/* <p>Enter username of the person you would like to add (optional)</p>
-          <Input placeholder="username"/><br /> */}
           <Button onClick={this.createHousehold}>Create Household</Button>
-          <pre>{JSON.stringify(this.state)}</pre>
         </Paper>
       </div>
     )

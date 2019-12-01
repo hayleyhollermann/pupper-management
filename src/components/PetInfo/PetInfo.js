@@ -4,8 +4,7 @@ import moment from 'moment';
 import Moment from 'react-moment';
 import 'moment-timezone';
 import Medications from '../Medications/Medications'
-import {Button, Paper, Typography, Fab} from '@material-ui/core';
-import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
+import {Button, Paper, Typography} from '@material-ui/core';
 
 
 class HomePage extends Component {
