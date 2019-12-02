@@ -26,7 +26,7 @@ class AddPet extends Component {
       newPet: {
         householdId: this.props.match.params.id,
         name: 'Bagley',
-        breed: 'Great Pyrenese',
+        breed: 'Great Pyrenees',
         weight: 25,
         age: 0,
         vetName: 'Hopkins Animal Hospital',
