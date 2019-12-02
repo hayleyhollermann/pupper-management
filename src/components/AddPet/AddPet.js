@@ -20,6 +20,21 @@ class AddPet extends Component {
       },
   }
 
+  autoFill = () => {
+    console.log('autofilling info!!');
+    this.setState({
+      newPet: {
+        householdId: this.props.match.params.id,
+        name: 'Bagley',
+        breed: 'Great Pyrenese',
+        weight: 25,
+        age: 0,
+        vetName: 'Hopkins Animal Hospital',
+        vetPhone: '952-935-5566'
+      }
+    })
+  }
+
   // changes specific property in state to input
   editNewPet = (property, event) => {
       this.setState({
@@ -45,7 +60,7 @@ class AddPet extends Component {
       <div className="paperDiv">
         <Paper className="paperArea center"> 
             <div>
-              <Typography variant="h5" component="h3">General Info</Typography>
+              <Typography variant="h5" component="h3" onClick={this.autoFill}>General Info</Typography>
               <TextField margin="dense" variant="outlined" label="Name" fullWidth={true} value={this.state.newPet.name}
                 onChange={ (event)=> this.editNewPet('name', event)}
               /> 
