@@ -80,7 +80,7 @@ router.get('/events-one-type', rejectUnauthenticated, (req, res) => {
         WHERE "pets"."id"=$1 AND "events"."id"=(SELECT "events"."id" FROM "events" WHERE "events"."type"=$2) 
         AND "households_users"."users_id" = $3
         ORDER BY "pets_events"."time" DESC
-        LIMIT 5;`
+        LIMIT 2;`
     pool.query(queryText, [req.query.petId, req.query.eventType, req.user.id])
         .then((results) => res.send(results.rows))
         .catch((err) => {

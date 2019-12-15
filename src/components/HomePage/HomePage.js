@@ -38,7 +38,7 @@ class HomePage extends Component {
               events = {this.props.householdEvents && this.props.householdEvents.length > 1 ? this.props.householdEvents.filter(recentEvents => recentEvents.id === pet.id)
               : [] } />
             )} <br />
-          {this.props.pets && this.props.pets.length>0 && this.props.pets[0].is_admin ? 
+          {/* {this.props.pets && this.props.pets.length>0 && this.props.pets[0].is_admin ? 
             <div className="center">
               <Fab variant="extended" size='large' onClick={this.addAPetForm}>
                 <AddRoundedIcon /> Add a Pet
@@ -46,7 +46,10 @@ class HomePage extends Component {
             </div>
             :
             ''
-          }
+          } */}
+          <Fab className="center" variant="extended" size='large' onClick={this.addAPetForm}>
+            <AddRoundedIcon /> Add a Pet
+          </Fab>
         </div>
         : 
         <div>
